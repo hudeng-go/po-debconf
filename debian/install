@@ -1,0 +1,14 @@
+debconf-gettextize usr/bin
+debconf-updatepo usr/bin
+doc/vi/*.html usr/share/doc/po-debconf/manpages.vi
+encodings usr/share/po-debconf
+po2debconf usr/bin
+podebconf-display-po usr/bin
+podebconf-report-po usr/bin
+podebconf-report-po_templates/call usr/share/po-debconf/templates
+podebconf-report-po_templates/call-po usr/share/po-debconf/templates
+podebconf-report-po_templates/submit usr/share/po-debconf/templates
+podebconf-report-po_templates/submit-po usr/share/po-debconf/templates
+podebconf-report-po_templates/translators usr/share/po-debconf/templates
+podebconf-report-po_templates/translators-po usr/share/po-debconf/templates
+pot-header usr/share/po-debconf

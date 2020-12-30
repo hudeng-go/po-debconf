@@ -1,0 +1,2999 @@
+# Translation of po-debconf templates to German
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2007, 2008, 2010, 2018.
+# This file is distributed under the same license as the po-debconf package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: po-debconf 1.0.2\n"
+"Report-Msgid-Bugs-To: po-debconf@packages.debian.org\n"
+"POT-Creation-Date: 2016-01-07 11:17-0200\n"
+"PO-Revision-Date: 2018-07-24 18:42+0200\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:2 en/debconf-updatepo.1.pod:2
+#: en/po2debconf.1.pod:2 en/po-debconf.7.pod:2 en/podebconf-display-po.1.pod:2
+#: en/podebconf-report-po.1.pod:2
+msgid "NAME"
+msgstr "NAME"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:4
+msgid ""
+"debconf-gettextize - extract translations of debconf templates into PO files"
+msgstr ""
+"debconf-gettextize - extrahiere Übersetzungen von Debconf-Vorlagen in PO-"
+"Dateien"
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:6 en/debconf-updatepo.1.pod:6
+#: en/po2debconf.1.pod:6 en/podebconf-display-po.1.pod:6
+#: en/podebconf-report-po.1.pod:6
+msgid "SYNOPSIS"
+msgstr "ÜBERSICHT"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:8
+msgid ""
+"B<debconf-gettextize> [B<-v>] [B<-h>] [B<--podir=I<DIR>>] [B<--choices>] "
+"[B<--merge>] I<master> [I<master> ...]"
+msgstr ""
+"B<debconf-gettextize> [B<-v>] [B<-h>] [B<--podir=I<VERZ>>] [B<--choices>] "
+"[B<--merge>] I<Master> [I<Master> ...]"
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:15 en/debconf-updatepo.1.pod:15
+#: en/po2debconf.1.pod:15 en/po-debconf.7.pod:6
+#: en/podebconf-display-po.1.pod:13 en/podebconf-report-po.1.pod:10
+msgid "DESCRIPTION"
+msgstr "BESCHREIBUNG"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:17
+msgid ""
+"The F</var/lib/dpkg/info/*.templates> files read by debconf contain English "
+"text and translations in the same file.  But in source packages, "
+"translations are managed in separate files to help translators.  In the "
+"initial implementation, a master F<templates> file contained only English "
+"text, and F<templates.I<xx>> files contained both original and translated "
+"strings for the language I<xx>.  The B<debconf-mergetemplate> program was "
+"merging master and translated templates files."
+msgstr ""
+"Die von Debconf gelesenen Dateien F</var/lib/dpkg/info/*.templates> "
+"enthalten englischen Text und Übersetzungen in der gleichen Datei. In "
+"Quellpaketen werden dagegen Übersetzungen in verschiedenen Dateien "
+"verwaltet, um Übersetzern zu helfen. In der ursprünglichen Implementation "
+"enthielt die Master-Datei F<templates> nur englischen Text und die Dateien "
+"F<templates.I<xx>> enthielten sowohl die ursprünglichen als auch die "
+"übersetzten Zeichenketten für die Sprache I<xx>. Das Programm B<debconf-"
+"mergetemplate> führte die Master- und die übersetzten Vorlagen-Dateien "
+"zusammen."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:25
+msgid ""
+"The new implementation with C<po-debconf> is based on C<gettext>.  "
+"Maintainers mark translatable fields by prepending them with an underscore, "
+"English strings are automatically extracted into a POT file, translators "
+"work on normal PO files, and B<po2debconf> generates a merged templates file "
+"with the same structure."
+msgstr ""
+"Die neue Implementation mit C<po-debconf> basiert auf C<Gettext>. Betreuer "
+"markieren übersetzbare Felder, in dem sie sie mit einem Unterstrich "
+"anführen, die englischen Zeichenketten werden automatisch in eine POT-Datei "
+"extrahiert, Übersetzer arbeiten mit normalen PO-Dateien und B<po2debconf> "
+"erstellt zusammengeführte Vorlagendateien mit der gleichen Struktur."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:31
+msgid ""
+"The B<debconf-gettextize> program was initially designed to help migrating "
+"to the new implementation."
+msgstr ""
+"Das Programm B<debconf-gettextize> wurde ursprünglich entwickelt, um bei der "
+"Migration auf die neue Implementierung zu helfen."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:38
+msgid ""
+"It reads a list of master files and their associated translations, and "
+"generates F<po/*.po> files for each language containing translated strings."
+msgstr ""
+"Es liest eine Liste von Master-Dateien und ihrer zugehörigen Übersetzungen "
+"und erstellt F<po/*.po>-Dateien für jede Sprache, die übersetzbare "
+"Zeichenketten enthält."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:44
+msgid ""
+"Each input file receives an C<.old> suffix, and a new master file overwrites "
+"the old one; it is identical to the previous master file except that an "
+"underscore is prepended to translatable fields.  Developers can then choose "
+"which fields translators have to work on and which ones are skipped because "
+"their values are not locale-dependent."
+msgstr ""
+"Jede Eingabedatei erhält einen Endung C<.old>, und eine neue Master-Datei "
+"überschreibt die alte; sie ist identisch mit der bisherigen Master-Datei, "
+"abgesehen davon, dass vor übersetzbaren Feldern ein Unterstrich eingefügt "
+"wird. Die Entwickler können dann entscheiden, an welchen Feldern die "
+"Übersetzer dann zu arbeiten haben und welche übergangen werden, da ihre "
+"Werte nicht von den Spracheinstellungen abhängen."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:53
+msgid ""
+"A F<po/POTFILES.in> file is also created, it contains the list of "
+"F<templates> files B<debconf-updatepo> has to process."
+msgstr ""
+"Auch eine F<po/POTFILES.in>-Datei wird erstellt, sie enthält die Liste der "
+"F<templates>-Dateien die B<debconf-updatepo> zu verarbeiten hat."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:58
+msgid ""
+"Typically the B<debconf-gettextize> program must be run only once when "
+"transforming from the first implementation to the C<po-debconf> format, but "
+"it can also be used afterwards to transform a C<_Choices> field into "
+"C<__Choices> (or vice-versa) without losing translations, when using the C<--"
+"merge> flag (alongside with C<--choices> or not).  The desired template "
+"containing the C<_Choices> or C<__Choices> fields to modify has to be copied "
+"into a temporary template file, which is passed to B<debconf-gettextize> as "
+"an argument.  Then the following steps are performed:"
+msgstr ""
+"Typischerweise muss das Programm B<debconf-gettextize> nur ein mal "
+"ausgeführt werden, wenn von der ersten Implementierung in das C<po-debconf>-"
+"Format überführt wird, aber es kann auch später verwendet werden, um ein "
+"C<_Choices> in ein C<__Choices>-Feld umzuwandeln (oder anders herum), ohne "
+"Übersetzungen zu verlieren, wenn der Schalter C<--merge> (zusammen mit C<--"
+"choices> oder nicht) verwendet wird. Die gewünschte Vorlage, die die "
+"C<_Choices>- oder C<__Choices>-Felder zum Anpassen enthält, muss in eine "
+"temporäre Vorlagen-Datei kopiert werden, die dann als Argument von B<debconf-"
+"gettextize> verwendet wird. Es werden dann die folgenden Schritte ausgeführt:"
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:70 en/po-debconf.7.pod:75
+msgid "1."
+msgstr "1."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:72
+msgid ""
+"B<po2debconf> is run on this template file to generate a translated "
+"templates file."
+msgstr ""
+"B<po2debconf> wird auf dieser Vorlagendatei ausgeführt, um die übersetzte "
+"Vorlagendatei zu erstellen."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:74 en/po-debconf.7.pod:81
+msgid "2."
+msgstr "2."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:76
+msgid ""
+"This translated templates file is processed as described above and PO files "
+"are generated."
+msgstr ""
+"Die übersetzte Vorlagendatei wird wie oben beschrieben verarbeitet und PO-"
+"Dateien erstellt."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:79
+msgid "3."
+msgstr "3."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:81
+msgid "Newly created PO files are merged with existing ones."
+msgstr "Neu-erstellte PO-Dateien werden mit den existierenden zusammengeführt."
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:85
+msgid ""
+"When PO files are merged, C<_Choices> fields have to be replaced by "
+"C<__Choices> (or vice-versa) in the original templates file before running "
+"B<debconf-updatepo>, otherwise new translations will be fuzzy."
+msgstr ""
+"Wenn PO-Dateien zusammengeführt werden, müssen C<_Choices>-Felder durch "
+"C<__Choices> (oder umgekehrt) in der Original-Vorlagendatei ersetzt werden, "
+"bevor B<debconf-updatepo> ausgeführt wird, da andernfalls neue Übersetzungen "
+"unscharf (»fuzzy«) wären."
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:89 en/debconf-updatepo.1.pod:24
+#: en/po2debconf.1.pod:37 en/podebconf-display-po.1.pod:28
+#: en/podebconf-report-po.1.pod:30
+msgid "OPTIONS"
+msgstr "OPTIONEN"
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:93 en/debconf-updatepo.1.pod:28
+#: en/po2debconf.1.pod:41 en/podebconf-display-po.1.pod:32
+#: en/podebconf-report-po.1.pod:162
+msgid "B<-h>, B<--help>"
+msgstr "B<-h>, B<--help>"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:95
+msgid "Display a usage summary for the program and exit."
+msgstr "Zeige ein Benutzungszusammenfassung an und beende sich."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:97 en/debconf-updatepo.1.pod:32
+#: en/po2debconf.1.pod:45 en/podebconf-report-po.1.pod:293
+msgid "B<-v>, B<--verbose>"
+msgstr "B<-v>, B<--verbose>"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:99 en/debconf-updatepo.1.pod:34
+#: en/po2debconf.1.pod:47
+msgid "Process in verbose mode."
+msgstr "Im geschwätzigen Modus arbeiten."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:101 en/debconf-updatepo.1.pod:36
+#: en/po2debconf.1.pod:49 en/podebconf-report-po.1.pod:220
+msgid "B<--podir=I<DIR>>"
+msgstr "B<--podir=I<VERZ>>"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:103
+msgid ""
+"Set directory for PO files.  Default is to search for PO files in the F<po> "
+"subdirectory below the location of the first master file."
+msgstr ""
+"Stellt das Verzeichnis für PO-Dateien ein. Standardmäßig wird nach PO-"
+"Dateien im F<po>-Unterverzeichnis unterhalb des Ablagepunktes der ersten "
+"Master-Datei gesucht."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:106
+msgid "B<--choices>"
+msgstr "B<--choices>"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:108
+msgid ""
+"By default, B<debconf-gettextize> replaces C<Choices> fields by "
+"C<_Choices>.  With this flag, C<__Choices> fields are written instead."
+msgstr ""
+"Standardmäßig ersetzt B<debconf-gettextize> C<Choices>-Felder durch "
+"C<_Choices>. Mit diesem Schalter werden stattdessen C<__Choices>-Felder "
+"geschrieben."
+
+#. type: =item
+#: en/debconf-gettextize.1.pod:112
+msgid "B<--merge>"
+msgstr "B<--merge>"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:114
+msgid ""
+"When this flag is set, the strings are merged with existing PO files.  The "
+"templates files and F<po/POTFILES.in> are not modified."
+msgstr ""
+"Wenn dieser Schalter gesetzt ist, werden die Zeichenketten mit den "
+"existierenden PO-Dateien zusammengeführt. Die Vorlagen-Dateien und F<po/"
+"POTFILES.in> werden nicht verändert."
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:119 en/po-debconf.7.pod:302
+#: en/podebconf-display-po.1.pod:42
+msgid "CAVEATS"
+msgstr "WARNUNGEN"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:121
+msgid ""
+"The C<Default> field is special when template type is C<Select> or "
+"C<Multiselect>, because a value has to be chosen amongst the B<English> list "
+"of choices, even for localized values.  Normally this field must not be "
+"changed, but in rare circumstances localized values are meaningful (e.g. to "
+"choose the default language of an application).  In order to let translators "
+"know that this localized C<Default> field is special, you must by convention "
+"call it C<_DefaultChoice> instead of C<_Default>."
+msgstr ""
+"Das Feld C<Default> stellt eine Besonderheit dar, wenn der Vorlagentyp "
+"C<Select> oder C<Multiselect> ist, da ein Wert aus der B<englischen> "
+"Auswahlliste, selbst für übersetzte Werte, ausgewählt werden muss. "
+"Normalerweise darf dieses Feld nicht verändert werden, allerdings sind in "
+"sehr seltenen Situationen angepasste (übersetzte) Werte sinnvoll (z.B. um "
+"die voreingestellte Sprache einer Anwendung auszuwählen). Um Übersetzer zu "
+"informieren, dass dieses angepasste (übersetzte) C<Default>-Feld eine "
+"Besonderheit darstellt, müssen Sie es (gemäß Konvention) C<_DefaultChoice> "
+"statt C<_Default> nennen."
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:130 en/debconf-updatepo.1.pod:80
+#: en/po2debconf.1.pod:103 en/po-debconf.7.pod:420
+#: en/podebconf-display-po.1.pod:83 en/podebconf-report-po.1.pod:486
+msgid "SEE ALSO"
+msgstr "SIEHE AUCH"
+
+#. type: textblock
+#: en/debconf-gettextize.1.pod:132
+msgid ""
+"L<debconf-updatepo(1)>, L<po2debconf(1)>, L<debconf-devel(7)>, L<po-"
+"debconf(7)>."
+msgstr ""
+"L<debconf-updatepo(1)>, L<po2debconf(1)>, L<debconf-devel(7)>, L<po-"
+"debconf(7)>."
+
+#. type: =head1
+#: en/debconf-gettextize.1.pod:137 en/po-debconf.7.pod:429
+msgid "AUTHORS"
+msgstr "AUTOREN"
+
+#. type: verbatim
+#: en/debconf-gettextize.1.pod:139
+#, no-wrap
+msgid ""
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"  Martin Quinson <martin.quinson@ens-lyon.fr>\n"
+"\n"
+msgstr ""
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"  Martin Quinson <martin.quinson@ens-lyon.fr>\n"
+"\n"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:4
+msgid "debconf-updatepo - update PO files about debconf templates"
+msgstr "debconf-updatepo - aktualisiere PO-Dateien über Debconf-Vorlagen"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:8
+msgid ""
+"B<debconf-updatepo> [B<-v>] [B<-h>] [B<--podir=I<DIR>>] [B<--skip-pot>] [B<--"
+"skip-merge>] [B<--msgid-bugs-address=I<EMAIL>>]"
+msgstr ""
+"B<debconf-updatepo> [B<-v>] [B<-h>] [B<--podir=I<VERZ>>] [B<--skip-pot>] "
+"[B<--skip-merge>] [B<--msgid-bugs-address=I<E-MAIL>>]"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:17
+msgid ""
+"This program reads F<po/POTFILES.in> to determine which master files need to "
+"be processed, then extracts new gettext strings into F<po/templates.pot> and "
+"updates all F<po/*.po> files.  This script can be called either in the top-"
+"level directory, or in the F<debian> or F<debian/po> subdirectories.  It is "
+"run by developer and/or translator to update PO files when the English text "
+"is modified in F<templates> files."
+msgstr ""
+"Dieses Programm liest F<po/POTFILES.in>, um zu ermitteln, welche Master-"
+"Dateien bearbeitet werden müssen. Dann extrahiert es neue Gettext-"
+"Zeichenketten in F<po/templates.pot> und aktualisiert alle F<po/*.po>-"
+"Dateien. Dieses Skript kann entweder im obersten Verzeichnis ausgeführt "
+"werden oder in den Unterverzeichnissen F<debian> oder F<debian/po>. Es wird "
+"vom Entwickler oder Übersetzer ausgeführt, um die PO-Dateien zu "
+"aktualisieren, wenn der englische Text in F<templates>-Dateien verändert "
+"wird."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:30 en/po2debconf.1.pod:43
+#: en/podebconf-display-po.1.pod:34
+msgid "Display a usage summary and exit."
+msgstr "Zeige eine Benutzungszusammenfassung und beende sich."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:38
+msgid ""
+"Set directory for PO files.  By default PO files are searched in F<debian/"
+"po>, F<po> and F<../po> directories in that order."
+msgstr ""
+"Stellt das Verzeichnis für PO-Dateien ein. Standardmäßig wird nach PO-"
+"Dateien in den Verzeichnissen F<debian/po>, F<po> und F<../po> gesucht, in "
+"dieser Reihenfolge."
+
+#. type: =item
+#: en/debconf-updatepo.1.pod:41
+msgid "B<--skip-pot>"
+msgstr "B<--skip-pot>"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:43
+msgid "Do not generate a new F<po/templates.pot> file."
+msgstr "Erzeuge keine neue Datei F<po/templates.pot>."
+
+#. type: =item
+#: en/debconf-updatepo.1.pod:45
+msgid "B<--skip-merge>"
+msgstr "B<--skip-merge>"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:47
+msgid "Do not merge existing PO files with F<po/templates.pot>."
+msgstr "Führe existierende PO-Dateien nicht mit F<po/templates.pot> zusammen."
+
+#. type: =item
+#: en/debconf-updatepo.1.pod:49
+msgid "B<--msgid-bugs-address=I<EMAIL>>"
+msgstr "B<--msgid-bugs-address=I<E-MAIL>>"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:51
+msgid ""
+"Set the email address that will be specified in the POT's Report-Msgid-Bugs-"
+"To field."
+msgstr ""
+"Stelle die E-Mail-Adresse ein, die im Feld »Report-Msgid-Bugs-To« in der POT-"
+"Datei angegeben werden wird."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:54
+msgid "By default, this field is set to <package>@package.debian.org."
+msgstr "Standardmäßig wird dieses Feld auf <Paket>@package.debian.org gesetzt."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:56
+msgid ""
+"It is intended for the maintainers of Debian based distributions, and should "
+"be used in the following cases:"
+msgstr ""
+"Sie ist für Betreuer von Debian-basierten Distributionen gedacht, und sollte "
+"in den folgenden Fällen verwendet werden:"
+
+#. type: =item
+#: en/debconf-updatepo.1.pod:61 en/debconf-updatepo.1.pod:66
+msgid "o"
+msgstr "o"
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:63
+msgid ""
+"The package is not present in Debian (and thus the <package>@packages.debian."
+"org address does not exist)."
+msgstr ""
+"Das Paket ist in Debian nicht enthalten (und die Adresse <Paket>@packages."
+"debian.org existiert daher nicht)."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:68
+msgid ""
+"The maintainer made significant changes in the debconf templates (or added "
+"templates to a Debian package without templates), and does not want to "
+"bother the Debian maintainer with bug reports that won't be relevant for the "
+"Debian maintainer."
+msgstr ""
+"Der Betreuer hat signifikante Änderungen an den Debconf-Vorlagen vorgenommen "
+"(oder Vorlagen zu einem Paket ohne Vorlagen hinzugefügt), und möchte daher "
+"den Debian-Betreuer nicht mit Fehlerberichten belästigen, die für diesen "
+"nicht relevant sind."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:75
+msgid ""
+"The default address is preferred to avoid corrections in the Debian based "
+"distribution without a notification to the Debian maintainer."
+msgstr ""
+"Die Standardadresse wird für Korrekturen in Debian-basierten Distributionen "
+"ohne Benachrichtigung des Debian-Betreuers bevorzugt."
+
+#. type: textblock
+#: en/debconf-updatepo.1.pod:82
+msgid ""
+"L<debconf-gettextize(1)>, L<po2debconf(1)>, L<podebconf-report-po(1)>, L<po-"
+"debconf(7)>."
+msgstr ""
+"L<debconf-gettextize(1)>, L<po2debconf(1)>, L<podebconf-report-po(1)>, L<po-"
+"debconf(7)>."
+
+#. type: =head1
+#: en/debconf-updatepo.1.pod:87 en/po2debconf.1.pod:109
+#: en/podebconf-display-po.1.pod:87 en/podebconf-report-po.1.pod:490
+msgid "AUTHOR"
+msgstr "AUTOR"
+
+#. type: verbatim
+#: en/debconf-updatepo.1.pod:89 en/po2debconf.1.pod:111
+#: en/podebconf-display-po.1.pod:89
+#, no-wrap
+msgid ""
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"\n"
+msgstr ""
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"\n"
+
+#. type: textblock
+#: en/po2debconf.1.pod:4
+msgid "po2debconf - merge master templates file and PO files"
+msgstr "po2debconf - führe Master-Vorlagendateien und PO-Dateien zusammen"
+
+#. type: textblock
+#: en/po2debconf.1.pod:8
+msgid ""
+"B<po2debconf> [B<-v>] [B<-h>] [B<--podir=I<DIR>>] [B<-o I<FILE>>] [B<-e "
+"I<STRING>>] I<master>"
+msgstr ""
+"B<po2debconf> [B<-v>] [B<-h>] [B<--podir=I<VERZ>>] [B<-o I<DATEI>>] [B<-e "
+"I<ZEICHENKETTE>>] I<Vorlage>"
+
+#. type: textblock
+#: en/po2debconf.1.pod:17
+msgid ""
+"This program reads all PO files and a single F<templates> file, and produces "
+"a Debconf templates file containing all translations, similar to the one "
+"produced by L<debconf-mergetemplate(1)> (from the C<debconf-utils> "
+"package).  PO files are by default searched in the F<po> subdirectory below "
+"the location of the master file."
+msgstr ""
+"Dieses Programm liest alle PO-Dateien und eine einzelne F<templates>-Datei "
+"und erstellt eine Debconf-Vorlagendatei, die alle Übersetzungen enthält, "
+"ähnlich zu der, die von L<debconf-mergetemplate(1)> (aus dem Paket C<debconf-"
+"utils>) erstellt wird. Es wird standardmäßig im F<po>-Unterverzeichnis "
+"unterhalb des Ortes der Master-Datei nach PO-Dateien gesucht."
+
+#. type: textblock
+#: en/po2debconf.1.pod:23
+msgid ""
+"To help the language code transition for Norwegian BokmE<aring>l, the B<no> "
+"and B<nb> language codes are handled specially.  If F<no.po> exists, it "
+"should be renamed to F<nb.po>.  Using F<nb.po> will make both C<-no> and C<-"
+"nb> translations available in the templates file."
+msgstr ""
+"Um dem Übergang der Sprachcodes für norwegisches BokmE<aring>l zu helfen, "
+"werden die Sprachcodes B<no> und B<nb> besonders behandelt. Falls F<no.po> "
+"existiert, wird es in F<nb.po> umbenannt. Durch Verwendung von F<nb.po> "
+"werden sowohl die C<-no>- als auch die C<-nb>-Übersetzungen in der "
+"Vorlagendatei verfügbar gemacht."
+
+#. type: textblock
+#: en/po2debconf.1.pod:28
+msgid ""
+"Lines beginning with a number sign (C<#>) are comments in templates files.  "
+"They are useful to give hints to translators, and are discarded by "
+"B<po2debconf>.  Special comments have been introduced in C<po-debconf> 1.0.  "
+"They are in the form C<#flag:I<directive>>.  The C<#flag:partial> is the "
+"only directive interpreted by B<po2debconf>.  Normally when a field is "
+"composed of several paragraphs (like C<__Choices> and C<_Description>), it "
+"is translated if all paragraphs are translated.  When a field contains "
+"C<#flag:partial>, translated strings may be mixed with untranslated strings."
+msgstr ""
+"Zeilen, die mit einem Nummernzeichen (C<#>) beginnen, sind in "
+"Vorlagendateien Kommentare. Sie geben nützliche Hinweise an Übersetzer und "
+"werden von B<po2debconf> verworfen. In C<po-debconf> 1.0 wurden spezielle "
+"Kommentare von der Form C<#flag:I<directive>> eingeführt. Nur C<#flag:"
+"partial> wird von B<po2debconf> interpretiert. Normalerweise ist ein Feld "
+"aus mehreren Absätzen (wie C<__Choices> und C<_Description>) übersetzt, wenn "
+"alle Absätze übersetzt sind. Wenn ein Feld C<#flag:partial> enthält, können "
+"übersetzte Zeichenketten mit unübersetzten Zeichenketten vermischt werden."
+
+#. type: textblock
+#: en/po2debconf.1.pod:51
+msgid ""
+"Set directory for PO files.  Default is to search PO files in the F<po> "
+"subdirectory below the location of the master file."
+msgstr ""
+"Stelle das Verzeichnis für PO-Dateien ein. Standardmäßig wird im "
+"Unterverzeichnis F<po> unterhalb des Ablageortes der Master-Datei nach PO-"
+"Dateien gesucht."
+
+#. type: =item
+#: en/po2debconf.1.pod:54
+msgid "B<-o>, B<--output=I<FILE>>"
+msgstr "B<-o>, B<--output=I<DATEI>>"
+
+#. type: textblock
+#: en/po2debconf.1.pod:56
+msgid "Set output filename (default is standard output)."
+msgstr ""
+"Stellt den Ausgabedateinamen ein (standardmäßig ist dies die "
+"Standardausgabe)."
+
+#. type: =item
+#: en/po2debconf.1.pod:58
+msgid "B<-e>, B<--encoding=I<STRING>>"
+msgstr "B<-e>, B<--encoding=I<ZEICHENKETTE>>"
+
+#. type: textblock
+#: en/po2debconf.1.pod:60
+msgid ""
+"Convert encoding.  Argument can take 3 values: C<utf8> (convert to UTF-8), "
+"C<po> (do not change encoding) and C<popular> (convert encoding of input "
+"files depending on their language; the C<PODEBCONF_ENCODINGS> environment "
+"variable must point to a name of a file containing the encoding map)."
+msgstr ""
+"Konvertiere die Kodierung. Das Argument kann drei Werte annehmen: C<utf8> "
+"(in UTF-8 konvertieren), C<po> (Kodierung nicht ändern) und C<popular> "
+"(konvertiere die Kodierung der Eingabedateien abhängig von der Sprache: die "
+"Umgebungsvariable C<PODEBCONF_ENCODINGS> muss auf den Namen einer Datei "
+"zeigen, die die Zuordnungstabelle der Kodierungen enthält)."
+
+#. type: textblock
+#: en/po2debconf.1.pod:66
+msgid "Such a filename looks like:"
+msgstr "Solch ein Dateiname sieht wie folgt aus:"
+
+#. type: verbatim
+#: en/po2debconf.1.pod:68
+#, no-wrap
+msgid ""
+"  #\n"
+"  #   Number is comment sign\n"
+"  #\n"
+"  cs       ISO-8859-2\n"
+"  da       ISO-8859-1\n"
+"  de       ISO-8859-1\n"
+"  el       ISO-8859-7\n"
+"\n"
+msgstr ""
+"  #\n"
+"  #   Das Nummernzeichen ist ein Kommentarzeichen\n"
+"  #\n"
+"  cs       ISO-8859-2\n"
+"  da       ISO-8859-1\n"
+"  de       ISO-8859-1\n"
+"  el       ISO-8859-7\n"
+"\n"
+
+#. type: textblock
+#: en/po2debconf.1.pod:76
+msgid "etc."
+msgstr "usw."
+
+#. type: textblock
+#: en/po2debconf.1.pod:78
+msgid ""
+"Default encoding used to be C<popular>, and has been switched to C<utf8> "
+"since po-debconf 0.9.0."
+msgstr ""
+"Die Standard-Kodierung war C<popular> und ist seit po-debconf 0.9.0 auf "
+"C<utf8> umgestellt."
+
+#. type: =head1
+#: en/po2debconf.1.pod:83
+msgid "OUTPUT FORMAT"
+msgstr "AUSGABEFORMAT"
+
+#. type: textblock
+#: en/po2debconf.1.pod:85
+msgid ""
+"Since debconf 1.2.0, templates format has changed, encoding is part of field "
+"names, i.e. they are C<foo-I<lang>.I<encoding>>.  When older debconf "
+"encounter such fields, they are silently ignored, which means that original "
+"text is displayed."
+msgstr ""
+"Seit Debconf 1.2.0 ist das Ausgabeformat geändert: Die Kodierung ist Teil "
+"der Feldnamen, d.h. sie lauten C<foo-I<Sprache>.I<Kodierung>>. Wenn ältere "
+"Versionen von Debconf auf diese Felder stoßen, werden sie ohne Meldung "
+"ignoriert, wodurch der ursprüngliche Text angezeigt wird."
+
+#. type: textblock
+#: en/po2debconf.1.pod:90
+msgid ""
+"If present, a F<po/output> file can override defaults for encoding and "
+"output format.  It contains a single line with two fields. The first field "
+"is the output format (currently valid values are 1 for fields in the form "
+"C<foo-I<lang>>, and 2 for C<foo-I<lang>.I<encoding>>) and the second field "
+"is the encoding, e.g."
+msgstr ""
+"Falls vorhanden kann eine Datei F<po/output> die Standardwerte für Kodierung "
+"und Ausgabeformat überschreiben. Diese Datei enthält eine einzige Zeile mit "
+"zwei Feldern. Das erste Feld ist das Ausgabeformat (derzeit gültige Werte "
+"sind 1 für Felder in der Form C<foo-I<Sprache>> und 2 für C<foo-I<Sprache>."
+"I<Kodierung>>) und das zweite Feld ist die Kodierung, z.B. lässt"
+
+#. type: verbatim
+#: en/po2debconf.1.pod:95
+#, no-wrap
+msgid ""
+"   echo '2 utf8' > po/output\n"
+"\n"
+msgstr ""
+"   echo '2 utf8' > po/output\n"
+"\n"
+
+#. type: textblock
+#: en/po2debconf.1.pod:97
+msgid "let B<po2debconf> convert text to UTF-8."
+msgstr "B<po2debconf> Text in UTF-8 konvertieren."
+
+#. type: textblock
+#: en/po2debconf.1.pod:99
+msgid ""
+"When encoding is set to C<po> or C<utf8>, output format is always set to 2, "
+"so that older debconf do not try to display text with wrong encodings."
+msgstr ""
+"Wenn die Kodierung auf C<po> oder C<utf8> gesetzt wird, wird das "
+"Ausgabeformat immer auf 2 gesetzt, so dass ältere Debconf nicht versuchen, "
+"den Text mit falschen Kodierungen anzuzeigen."
+
+#. type: textblock
+#: en/po2debconf.1.pod:105
+msgid "L<debconf-gettextize(1)>, L<debconf-updatepo(1)>, L<po-debconf(7)>."
+msgstr "L<debconf-gettextize(1)>, L<debconf-updatepo(1)>, L<po-debconf(7)>."
+
+#. type: textblock
+#: en/po-debconf.7.pod:4
+msgid "po-debconf - introduction"
+msgstr "po-debconf - Einführung"
+
+#. type: textblock
+#: en/po-debconf.7.pod:8
+msgid ""
+"The goal of C<debconf> was to make package configuration user-friendly.  In "
+"order to achieve this, it is important to ensure that users will get the "
+"question in their own language.  Translators need a framework to easily work "
+"on translations without having to track package development; C<po-debconf> "
+"was designed to be able to work with standard C<gettext> tools when "
+"translating debconf templates files."
+msgstr ""
+"Das Ziel von C<Debconf> bestand darin, die Paketkonfiguration "
+"benutzerfreundlich zu gestalten. Um dies zu erreichen, ist es wichtig "
+"sicherzustellen, dass die Benutzer die Fragen in ihrer eigenen Sprache "
+"präsentiert bekommen. Übersetzer benötigen ein Rahmenwerk, um leicht an "
+"Übersetzungen arbeiten zu können, ohne die Paketentwicklung nachzuverfolgen. "
+"C<po-debconf> wurde entwickelt, um beim Übersetzen der Debconf-"
+"Vorlagendateien mit den Standard-C<Gettext>-Werkzeugen zu arbeiten."
+
+#. type: =head1
+#: en/po-debconf.7.pod:15
+msgid "ADDING I18N SUPPORT TO DEBCONF TEMPLATES FILES"
+msgstr "I18N-UNTERSTÜTZUNG ZU DEBCONF-VORLAGENDATEIEN HINZUFÜGEN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:17
+msgid ""
+"If you are adding debconf support to your package, you have written a "
+"templates file containing English text.  To add proper i18n support into "
+"your package, you need to:"
+msgstr ""
+"Falls Sie Debconf-Unterstützung für Ihr Paket hinzufügen, haben Sie eine "
+"Vorlagendatei mit englischem Text erstellt. Um korrekte i18n-Unterstützung "
+"zu Ihrem Paket hinzuzufügen, müssen Sie das folgende erledigen:"
+
+#. type: =item
+#: en/po-debconf.7.pod:23
+msgid "- Create F<debian/po/POTFILES.in>"
+msgstr "- Erstellen Sie F<debian/po/POTFILES.in>"
+
+#. type: textblock
+#: en/po-debconf.7.pod:25
+msgid ""
+"This file contains the list of master templates.  It typically contains a "
+"single line:"
+msgstr ""
+"Diese Datei enthält die Liste der Master-Vorlagen. Typischerweise enthält "
+"sie eine einzelne Zeile:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:28
+#, no-wrap
+msgid ""
+"  [type: gettext/rfc822deb] templates\n"
+"\n"
+msgstr ""
+"  [type: gettext/rfc822deb] templates\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:30
+msgid "Paths are relative to the parent directory."
+msgstr "Pfade sind relativ zum Elternverzeichnis."
+
+#. type: =item
+#: en/po-debconf.7.pod:32
+msgid "- Prepend an underscore before translatable fields in each template"
+msgstr ""
+"- Stellen Sie übersetzbaren Feldern in jeder Vorlage einen Unterstrich voran"
+
+#. type: textblock
+#: en/po-debconf.7.pod:34
+msgid ""
+"Normally C<Description>, C<Choices> and sometimes C<Default> fields can be "
+"translated."
+msgstr ""
+"Normalerweise können die Felder C<Description>, C<Choices> und manchmal "
+"C<Default> übersetzt werden."
+
+#. type: =item
+#: en/po-debconf.7.pod:36
+msgid "- Run B<debconf-updatepo>"
+msgstr "- Führen Sie B<debconf-updatepo> aus"
+
+#. type: textblock
+#: en/po-debconf.7.pod:38
+msgid ""
+"This will create the F<debian/po/templates.pot> file that translators will "
+"translate into their language."
+msgstr ""
+"Dies erstellt die Datei F<debian/po/templates.pot>, die dann die Übersetzer "
+"in ihre eigene Sprache übersetzen werden."
+
+#. type: =item
+#: en/po-debconf.7.pod:41
+msgid "- Add a build dependency on C<po-debconf> in F<debian/control>"
+msgstr ""
+"- Fügen Sie eine Bau-Abhängigkeit auf C<po-debconf> in F<debian/control> "
+"hinzu."
+
+#. type: =head1
+#: en/po-debconf.7.pod:45
+msgid "UPDATE TEMPLATES"
+msgstr "VORLAGEN AKTUALISIEREN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:47
+msgid ""
+"In order to help translators, PO files in your package should always be up-"
+"to-date, otherwise they may waste their time translating unused strings.  "
+"For that, simply call the following command without arguments:"
+msgstr ""
+"Um Übersetzern zu helfen, sollten PO-Dateien in Ihren Paketen immer aktuell "
+"sein, andernfalls könnten diese ihre Zeit mit unbenutzten Zeichenketten "
+"verschwenden. Um dies zu erreichen, rufen Sie einfach den folgenden Befehl "
+"ohne Argumente auf:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:51
+#, no-wrap
+msgid ""
+"  $ debconf-updatepo\n"
+"\n"
+msgstr ""
+"  $ debconf-updatepo\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:53
+msgid ""
+"You should run this command every time you change templates in English, but "
+"also when you receive new or updated translations, because translators may "
+"have worked on an obsolete PO file."
+msgstr ""
+"Sie sollten diesen Befehl jedes Mal ausführen, wenn Sie Ihre englischen "
+"Vorlagen ändern, aber auch, wenn Sie neue oder aktualisierte Übersetzungen "
+"erhalten, da Übersetzer an einer veralteten PO-Datei gearbeitet haben "
+"könnten."
+
+#. type: textblock
+#: en/po-debconf.7.pod:57
+msgid ""
+"If you rename, add or remove some templates files, remember also to edit "
+"F<debian/po/POTFILES.in> accordingly, otherwise English strings are missing "
+"from PO files and will be displayed to users even if PO files are fully "
+"translated."
+msgstr ""
+"Falls Sie einige Vorlagen-Dateien umbenennen, hinzufügen oder entfernen, "
+"denken Sie daran, auch F<debian/po/POTFILES.in> entsprechend zu bearbeiten, "
+"da andernfalls englische Zeichenketten aus den PO-Dateien fehlen und "
+"Benutzern angezeigt werden, selbst wenn die PO-Dateien vollständig übersetzt "
+"sind."
+
+#. type: textblock
+#: en/po-debconf.7.pod:62
+msgid ""
+"The B<debconf-updatepo> program is idempotent, it modifies PO files only if "
+"their content has been updated.  Thus the best way to provide up-to-date PO "
+"files in your source package is to call this command from the C<clean> "
+"target of the F<debian/rules> file."
+msgstr ""
+"Das Programm B<debconf-updatepo> is idempotent, es verändert PO-Dateien nur, "
+"wenn sich ihr Inhalt geändert hat. Daher ist die beste Art, um aktuelle PO-"
+"Dateien in Ihren Quellpaketen bereitzustellen, ein Aufruf dieses Befehls im "
+"C<clean>-Ziel in der Datei F<debian/rules>."
+
+#. type: textblock
+#: en/po-debconf.7.pod:67
+msgid ""
+"Please note that you need to run B<debconf-updatepo> even if you use "
+"B<dh_installdebconf>.  The latter calls B<po2debconf> which used to call "
+"B<debconf-updatepo> if outdated files were detected, but this is no more the "
+"case because it was not a good solution for at least two reasons:"
+msgstr ""
+"Bitte beachten Sie, dass Sie B<debconf-updatepo> selbst dann ausführen "
+"müssen, falls Sie B<dh_installdebconf> verwenden. Letzeres ruft "
+"B<po2debconf> auf, das früher B<debconf-updatepo> ausführte, falls veraltete "
+"Dateien entdeckt wurden. Dies passiert nicht mehr, da dies aus mindestens "
+"zwei Gründen keine gute Idee war:"
+
+#. type: textblock
+#: en/po-debconf.7.pod:77
+msgid ""
+"B<po2debconf> relied on timestamps to detect outdated files, and may be "
+"abused when using C<pbuilder> or if an outdated translation has been stored "
+"on disk after templates have been modified"
+msgstr ""
+"B<po2debconf> verließ sich auf Zeitstempel, um veraltete Dateien zu "
+"erkennen. Es kann missbraucht werden, wenn C<pbuilder> verwendet wird oder "
+"falls eine veraltete Übersetzung lange nach der Änderung der Vorlagen auf "
+"der Platte gespeichert wird."
+
+#. type: textblock
+#: en/po-debconf.7.pod:83
+msgid ""
+"B<dh_installdebconf> is called long after C<.diff.gz> file has been generated"
+msgstr ""
+"B<dh_installdebconf> wird lange nach der Erstellung der Datei C<.diff.gz> "
+"ausgeführt."
+
+#. type: =head1
+#: en/po-debconf.7.pod:88
+msgid "MERGE TRANSLATIONS AND ORIGINAL"
+msgstr "ÜBERSETZUNGEN UND ORIGINAL ZUSAMMENFÜHREN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:90
+msgid ""
+"You have to make sure that when your package is compiled, translations will "
+"get into the built package. You can do that manually, or automatically using "
+"the B<dh_installdebconf> script (make sure to have a versioned build "
+"dependency against C<debhelper (E<gt>= 4.1.16)>)."
+msgstr ""
+"Sie müssen sicherstellen, dass beim Paketbau die Übersetzungen in das "
+"gebaute Paket gelangen. Sie können dies manuell durchführen, oder mit dem "
+"Skript B<dh_installdebconf> automatisch (achten Sie darauf, dass die Bau-"
+"Abhängigkeit versioniert ist: C<debhelper (E<gt>= 4.1.16)>)."
+
+#. type: textblock
+#: en/po-debconf.7.pod:95
+msgid ""
+"To do that manually, you'll have to merge the templates and the translations "
+"at compile time (and to have a build depend against C<po-debconf>) like this:"
+msgstr ""
+"Um dies manuell zu erreichen, müssen Sie die Vorlagen und die Übersetzungen "
+"beim Bauen manuell zusammenführen (und Sie müssen eine Bau-Abhängigkeit auf "
+"C<po-debconf> haben). Dies geschieht wie folgt:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:99
+#, no-wrap
+msgid ""
+"  $ po2debconf debian/templates > debian/tmp/DEBIAN/templates\n"
+"\n"
+msgstr ""
+"  $ po2debconf debian/templates > debian/tmp/DEBIAN/templates\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:101
+msgid ""
+"B<BE CAREFUL>: the two files called F<templates> are not the same at all.  "
+"The first one contains only the English text, with marks to denote some "
+"fields to be translated while the second contains all languages.  That is to "
+"say that you CANNOT keep only the merged templates, or you won't be able to "
+"deal with translations as people submit them to you."
+msgstr ""
+"B<SEIEN SIE VORSICHTIG>: die zwei Dateien mit dem Namen F<templates> sind "
+"überhaupt nicht identisch. Die erste enthält nur englischen Text, und "
+"enthält Markierungen, um einige Felder als übersetzbar zu kennzeichnen, "
+"während die zweite alle Sprachen enthält. Anders ausgedrückt, Sie KÖNNEN "
+"NICHT nur die zusammengeführten Vorlagen behalten, oder Sie werden nicht in "
+"der Lage sein, mit Übersetzungen umzugehen, wenn diese bei Ihnen eingereicht "
+"werden."
+
+#. type: =head1
+#: en/po-debconf.7.pod:108
+msgid "NEW MASTER TEMPLATES"
+msgstr "NEUE MASTER-VORLAGEN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:110
+msgid ""
+"The new templates file source format is almost identical to one of "
+"distributed templates files, but translatable fields are prepended with an "
+"underscore.  Example:"
+msgstr ""
+"Das neue Quellformat der Vorlagendateien ist nahezu identisch zu einer der "
+"verteilten Vorlagendateien, aber übersetzbaren Felder wird ein Unterstrich "
+"vorangestellt. Beispiel:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:114
+#, no-wrap
+msgid ""
+"  Template: debconf/frontend\n"
+"  Type: select\n"
+"  _Choices: Dialog, Readline, Gnome, Editor, Noninteractive\n"
+"  Default: Dialog\n"
+"  _Description: Interface to use for configuring packages:\n"
+"   Packages that use debconf for configuration share a common look and\n"
+"   feel.  You can select the type of user interface they use.\n"
+"   .\n"
+"   The dialog frontend is a full-screen, character based interface,\n"
+"   while the readline frontend uses a more traditional plain text\n"
+"   interface, and the gnome frontend is a modern X interface.  The\n"
+"   editor frontend lets you configure things using your favorite text\n"
+"   editor. The noninteractive frontend never asks you any questions.\n"
+"\n"
+msgstr ""
+"  Template: debconf/frontend\n"
+"  Type: select\n"
+"  _Choices: Dialog, Readline, Gnome, Editor, Noninteractive\n"
+"  Default: Dialog\n"
+"  _Description: Interface to use for configuring packages:\n"
+"   Packages that use debconf for configuration share a common look and\n"
+"   feel.  You can select the type of user interface they use.\n"
+"   .\n"
+"   The dialog frontend is a full-screen, character based interface,\n"
+"   while the readline frontend uses a more traditional plain text\n"
+"   interface, and the gnome frontend is a modern X interface.  The\n"
+"   editor frontend lets you configure things using your favorite text\n"
+"   editor. The noninteractive frontend never asks you any questions.\n"
+"\n"
+
+#. type: =head2
+#: en/po-debconf.7.pod:128
+msgid "SPLITTING CHOICES LIST"
+msgstr "CHOICES-LISTEN AUFTEILEN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:130
+msgid ""
+"Since C<po-debconf> 0.6.0, localized fields may contain two leading "
+"underscores.  In this case, the field value is supposed to be a comma "
+"separated list of values, which are put in separate msgids.  Thus if the "
+"previous example did contain"
+msgstr ""
+"Seit C<po-debconf> 0.6.0 dürfen übersetzte Felder zwei führende Unterstriche "
+"haben. In diesem Fall sollte der Feld-Wert eine Komma-separierte Liste von "
+"Werten sein, die in separate msgids gesteckt werden. Falls daher das "
+"vorherige Beispiel folgendes enthielt"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:135
+#, no-wrap
+msgid ""
+"  __Choices: Dialog, Readline, Gnome, Editor, Noninteractive\n"
+"\n"
+msgstr ""
+"  __Choices: Dialog, Readline, Gnome, Editor, Noninteractive\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:137
+msgid ""
+"there would be 5 different msgids.  Note that spaces after commas are not "
+"significant."
+msgstr ""
+"gäbe es fünf verschiedene msgids. Beachten Sie, dass Leerzeichen nach "
+"Kommata nicht signifikant sind."
+
+#. type: textblock
+#: en/po-debconf.7.pod:140
+msgid ""
+"When a choices list never changes, C<_Choices> may be considered fine.  "
+"However, splitting such lists may help avoiding frequent mistakes in "
+"translations such as omitting a choice or using non-standard commas.  For "
+"such reasons, the use of C<__Choices> will ease translator's life and is "
+"strongly recommended."
+msgstr ""
+"Wenn sich eine Auswahlliste nie ändert, kann C<_Choices> geeignet sein. Das "
+"Auftrennen einer solchen Liste kann aber bei der Vermeidung häufiger Fehler "
+"in Übersetzungen, wie beispielsweise dem Vergessen einer Auswahl oder der "
+"Verwendung nicht passender Kommata, helfen. Aus diesen Gründen erleichtert "
+"die Wahl von C<__Choices> das Leben der Übersetzer und wird nachdrücklich "
+"empfohlen."
+
+#. type: textblock
+#: en/po-debconf.7.pod:146
+msgid ""
+"Unfortunately if you decide to switch from C<_Choices> to C<__Choices>, all "
+"translations become fuzzy.  Here is an explanation to make this change "
+"without translation loss (it requires C<po-debconf> E<gt>= 1.0).  Suppose "
+"that we want to switch the previous example to C<__Choices>.  You copy the "
+"F<templates> file into a temporary file."
+msgstr ""
+"Unglücklicherweise werden alle Übersetzungen unscharf (»fuzzy«), wenn Sie "
+"sich entscheiden, von C<_Choices> auf C<__Choices> umzusteigen. Es folgt "
+"eine Erläuterung, wie Sie diese Änderung ohne Verlust an Übersetzungen "
+"realisieren können (hierfür wird C<po-debconf> E<gt>= 1.0 benötigt). Nehmen "
+"Sie an, dass wir das bisherige Beispiel auf C<__Choices> umstellen wollen. "
+"Sie kopieren die Datei F<templates> in eine temporäre Datei."
+
+#. type: verbatim
+#: en/po-debconf.7.pod:152
+#, no-wrap
+msgid ""
+"  $ cp debian/templates debian/foo\n"
+"\n"
+msgstr ""
+"  $ cp debian/templates debian/foo\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:154
+msgid ""
+"Edit F<debian/foo> and keep only C<Template>, C<Type> and C<_Choices> "
+"fields, which are in this example"
+msgstr ""
+"Bearbeiten Sie F<debian/foo> und behalten Sie nur die Felder C<Template>, "
+"C<Type> und C<_Choices>. In diesem Beispiel sind dies:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:157
+#, no-wrap
+msgid ""
+"  Template: debconf/frontend\n"
+"  Type: select\n"
+"  _Choices: Dialog, Readline, Gnome, Kde, Editor, Noninteractive\n"
+"\n"
+msgstr ""
+"  Template: debconf/frontend\n"
+"  Type: select\n"
+"  _Choices: Dialog, Readline, Gnome, Kde, Editor, Noninteractive\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:161
+msgid ""
+"Run B<debconf-gettextize> with C<--merge> and C<--choices> flags to build PO "
+"files as if C<__Choices> was written, and merge these PO files to existing "
+"ones:"
+msgstr ""
+"Führen Sie B<debconf-gettextize> mit den Schaltern C<--merge> und C<--"
+"choices> aus, um PO-Dateien so zu schreiben, als ob C<__Choices> geschrieben "
+"wäre und führen Sie diese PO-Dateien mit den existierenden zusammen:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:164
+#, no-wrap
+msgid ""
+"  $ debconf-gettextize --merge --choices debian/foo\n"
+"\n"
+msgstr ""
+"  $ debconf-gettextize --merge --choices debian/foo\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:166
+msgid ""
+"Eventually you have to remove F<foo> and manually edit F<debian/templates> "
+"to replace C<_Choices> by C<__Choices> before B<debconf-updatepo> is run."
+msgstr ""
+"Schließlich müssen Sie F<foo> entfernen und F<debian/templates> manuell "
+"bearbeiten, um C<_Choices> durch C<__Choices> zu ersetzen, bevor B<debconf-"
+"updatepo> ausgeführt wird."
+
+#. type: =head2
+#: en/po-debconf.7.pod:169
+msgid "PUTTING IN COMMENTS FOR TRANSLATORS"
+msgstr "KOMMENTARE FÜR ÜBERSETZER EINFÜGEN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:171
+msgid ""
+"C<Dpkg> maintainers decided that by convention lines beginning with a number "
+"sign (C<#>) are comments in F<debian/control> files, and C<po-debconf> "
+"follows this rule.  Since C<po-debconf> 0.8.0, such comments are written "
+"into PO files, and can then contain valuable information for translators.  "
+"Incidentally all previous C<po-debconf> versions ignore lines which do not "
+"contain a colon, thus if your comments does not contain any colons, there is "
+"no need to add a versioned build dependency against C<po-debconf>.  Here is "
+"an example:"
+msgstr ""
+"Die Betreuer von C<Dpkg> haben entschieden, dass per Konvention Zeilen in "
+"F<debian/control>, die mit einem Nummern-Zeichen (C<#>) beginnen, Kommentare "
+"sind, und C<po-debconf> folgt dieser Regel. Seit C<po-debconf> 0.8.0 werden "
+"solche Kommentare in PO-Dateien geschrieben und können wertvolle "
+"Informationen für Übersetzer enthalten. Zufälligerweise ignorierten ältere "
+"Versionen von C<po-debconf> Zeilen, die keinen Doppelpunkt enthielten, falls "
+"daher Ihre Kommentare keinen Doppelpunkt enthalten, brauchen Sie keine "
+"versionierte Abhängigkeit auf C<po-debconf> zu verwenden. Hier ist ein "
+"Beispiel:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:180
+#, no-wrap
+msgid ""
+"  Template: debconf/button-yes\n"
+"  Type: text\n"
+"  # Translators, this text will appear on a button, so KEEP IT SHORT\n"
+"  _Description: Yes\n"
+"\n"
+msgstr ""
+"  Template: debconf/button-yes\n"
+"  Type: text\n"
+"  # Translators, this text will appear on a button, so KEEP IT SHORT\n"
+"  _Description: Yes\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:185
+msgid ""
+"Special comments have been introduced in C<po-debconf> 1.0 to deal with "
+"strings which are composed of several items (as with I<Choices> field) or "
+"paragraphs (like I<Description>).  With these directives, developers have a "
+"better control over what is exposed to translators.  They are in the form "
+"C<#flag:I<directive>>; directives are detailed below."
+msgstr ""
+"In C<po-debconf> 1.0 wurden spezielle Kommentare eingefügt, um mit "
+"Zeichenketten umzugehen, die aus mehreren Einträgen (wie bei I<Choices>-"
+"Feldern) oder Absätzen (wie bei I<Description>) bestehen. Mit diesen "
+"Direktiven haben Entwickler eine bessere Kontrolle darüber, was für "
+"Übersetzer sichtbar ist. Sie haben die Form C<#flag:I<Direktive>>; die "
+"Direktiven werden im Detail weiter unten beschrieben."
+
+#. type: =item
+#: en/po-debconf.7.pod:193
+msgid "B<translate:>I<spec>, B<translate!:>I<spec>"
+msgstr "B<translate:>I<Spezifikation>, B<translate!:>I<Spezifikation>"
+
+#. type: textblock
+#: en/po-debconf.7.pod:195
+msgid ""
+"Mark only some items as translatable; I<spec> is a comma separated list of "
+"numbers, it specifies which strings will be printed into PO files.  Ranges "
+"can also be defined via a minus sign (for instance C<2-6>), and a star "
+"(C<*>) means all strings.  For instance, with"
+msgstr ""
+"Markiere nur einige Einträge als übersetzbar; I<Spezifikation> ist eine "
+"durch Kommata getrennte Liste von Zahlen, die angibt, welche Zeichenketten "
+"in PO-Dateien abgedruckt werden. Bereiche können über ein Minuszeichen "
+"angegeben werden (zum Beispiel C<2-6>) und ein Stern (C<*>) bedeutet alle "
+"Zeichenketten. Zum Beispiel wird mit"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:200
+#, no-wrap
+msgid ""
+"  Template: partman-basicfilesystems/fat_mountpoint\n"
+"  Type: select\n"
+"  #flag:translate:3,4\n"
+"  __Choices: /dos, /windows, Enter manually, Do not mount it\n"
+"  _Description: Mount point for this partition:\n"
+"\n"
+msgstr ""
+"  Template: partman-basicfilesystems/fat_mountpoint\n"
+"  Type: select\n"
+"  #flag:translate:3,4\n"
+"  __Choices: /dos, /windows, Enter manually, Do not mount it\n"
+"  _Description: Mount point for this partition:\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:206
+msgid ""
+"C<Enter manually> and C<Do not mount it> will appear in PO files but not C</"
+"dos> and C</windows>.  When an exclamation mark follows the B<translate> "
+"keyword, I<spec> specifies which strings will be discarded from PO files, "
+"all other strings are printed.  Previous example is similar to"
+msgstr ""
+"C<Enter manually> und C<Do not mount it> in PO-Dateien auftauchen, aber "
+"nicht C</dos> und C</windows>. Wenn das Schlüsselwort B<translate> von einem "
+"Ausrufezeichen gefolgt wird, gibt I<Spezifikation> an, welche Zeichenketten "
+"für die PO-Datei verworfen werden, alle anderen Zeichenketten werden "
+"abgedruckt. Das vorhergehende Beispiel ist ähnlich zu"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:211
+#, no-wrap
+msgid ""
+"  Template: partman-basicfilesystems/fat_mountpoint\n"
+"  Type: select\n"
+"  #flag:translate!:1,2\n"
+"  __Choices: /dos, /windows, Enter manually, Do not mount it\n"
+"  _Description: Mount point for this partition:\n"
+"\n"
+msgstr ""
+"  Template: partman-basicfilesystems/fat_mountpoint\n"
+"  Type: select\n"
+"  #flag:translate!:1,2\n"
+"  __Choices: /dos, /windows, Enter manually, Do not mount it\n"
+"  _Description: Mount point for this partition:\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:217
+msgid ""
+"The same keyword can also be applied to the I<Description> field to make "
+"sure that some strings are not translated."
+msgstr ""
+"Das gleiche Schlüsselwort kann auch für das Feld I<Description> verwendet "
+"werden, um sicherzustellen, dass einige Zeichenketten nicht übersetzt werden."
+
+#. type: verbatim
+#: en/po-debconf.7.pod:220
+#, no-wrap
+msgid ""
+"  Template: partman-crypto/options_missing\n"
+"  Type: error\n"
+"  #flag:translate!:3\n"
+"  _Description: Required encryption options missing\n"
+"   The encryption options for ${DEVICE} are incomplete. Please\n"
+"   return to the partition menu and select all required options.\n"
+"   .\n"
+"   ${ITEMS}\n"
+"\n"
+msgstr ""
+"  Template: partman-crypto/options_missing\n"
+"  Type: error\n"
+"  #flag:translate!:3\n"
+"  _Description: Required encryption options missing\n"
+"   The encryption options for ${DEVICE} are incomplete. Please\n"
+"   return to the partition menu and select all required options.\n"
+"   .\n"
+"   ${ITEMS}\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:229
+msgid ""
+"But this is hazardous because context may be dropped from PO files, please "
+"add comments in this case so that translators are not confused."
+msgstr ""
+"Dies ist allerdings gefährlich, da aus den PO-Dateien Kontext entfernt "
+"werden könnte, fügen Sie daher in diesem Fall Kommentare hinzu, so dass "
+"Übersetzer nicht durcheinander gebracht werden."
+
+#. type: =item
+#: en/po-debconf.7.pod:232
+msgid "B<comment:>I<spec>, B<comment!:>I<spec>"
+msgstr "B<comment:>I<Spezifikation>, B<comment!:>I<Spezifikation>"
+
+#. type: textblock
+#: en/po-debconf.7.pod:234
+msgid ""
+"The comment just below this directive applies to the strings specified by "
+"I<spec>, which is defined above.  By default, a comment written before a "
+"translatable field is printed along with all strings belonging to this "
+"field.  (Note: with C<po-debconf> E<lt> 1.0, the comment was printed only "
+"with the first string)"
+msgstr ""
+"Der Kommentar direkt unterhalb dieser Direktive betrifft die Zeichenketten, "
+"die durch I<Spezifikation> (siehe oben) angegeben werden. Standardmäßig wird "
+"ein Kommentar, der vor einem übersetzbaren Feld eingefügt wurde, bei allen "
+"Zeichenketten abgedruckt, die zu diesem Feld gehören (beachten Sie: bei C<po-"
+"debconf> E<lt> 1.0 wurde der Kommentar nur bei der ersten Zeichenkette "
+"ausgegeben)."
+
+#. type: verbatim
+#: en/po-debconf.7.pod:240
+#, no-wrap
+msgid ""
+"  Template: arcboot-installer/prom-variables\n"
+"  Type: note\n"
+"  # Translators, the 4th string of this description has been dropped\n"
+"  # from PO files.  It contains shell commands and should not be\n"
+"  # translated.\n"
+"  #flag:comment:3\n"
+"  # \"Stop for Maintenance\" should be left in English\n"
+"  #flag:translate!:4\n"
+"  _Description: Setting PROM variables for Arcboot\n"
+"   If this is the first Linux installation on this machine, or if the\n"
+"   hard drives have been repartitioned, some variables need to be set\n"
+"   in the PROM before the system is able to boot normally.\n"
+"   .\n"
+"   At the end of this installation stage, the system will reboot.\n"
+"   After this, enter the command monitor from the \"Stop for\n"
+"   Maintenance\" option, and enter the following commands:\n"
+"   .\n"
+"      setenv OSLoader arcboot\n"
+"      setenv OSLoadFilename Linux\n"
+"   .\n"
+"   You will only need to do this once.  Afterwards, enter the \"boot\"\n"
+"   command or reboot the system to proceed to the next stage of the\n"
+"   installation.\n"
+"\n"
+msgstr ""
+"  Template: arcboot-installer/prom-variables\n"
+"  Type: note\n"
+"  # Translators, the 4th string of this description has been dropped\n"
+"  # from PO files.  It contains shell commands and should not be\n"
+"  # translated.\n"
+"  #flag:comment:3\n"
+"  # \"Stop for Maintenance\" should be left in English\n"
+"  #flag:translate!:4\n"
+"  _Description: Setting PROM variables for Arcboot\n"
+"   If this is the first Linux installation on this machine, or if the\n"
+"   hard drives have been repartitioned, some variables need to be set\n"
+"   in the PROM before the system is able to boot normally.\n"
+"   .\n"
+"   At the end of this installation stage, the system will reboot.\n"
+"   After this, enter the command monitor from the \"Stop for\n"
+"   Maintenance\" option, and enter the following commands:\n"
+"   .\n"
+"      setenv OSLoader arcboot\n"
+"      setenv OSLoadFilename Linux\n"
+"   .\n"
+"   You will only need to do this once.  Afterwards, enter the \"boot\"\n"
+"   command or reboot the system to proceed to the next stage of the\n"
+"   installation.\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:264
+msgid ""
+"The example above has a comment without C<#flag:comment> directive, where an "
+"implicit C<#flag:comment:*> is added.  This comment appears with all "
+"strings, but the one about I<Stop for Maintenance> is printed only before "
+"the relevant string."
+msgstr ""
+"Im obigen Beispiel ist ein Kommentar ohne Direktive C<#flag:comment>. Hier "
+"wird implizit C<#flag:comment:*> hinzugefügt. Dieser Kommentar erscheint bei "
+"allen Zeichenketten, aber der Kommentar bezüglich I<Stop for Maintenance> "
+"wird nur vor der relevanten Zeichenkette abgedruckt."
+
+#. type: =item
+#: en/po-debconf.7.pod:268
+msgid "B<partial>"
+msgstr "B<partial>"
+
+#. type: textblock
+#: en/po-debconf.7.pod:270
+msgid ""
+"This keyword tells B<po2debconf> to keep translated strings even if all "
+"strings have not been translated.  Please use with caution, this keyword has "
+"been introduced for very specific purposes."
+msgstr ""
+"Dieses Schlüsselwort teilt B<po2debconf> mit, übersetzte Zeichenketten zu "
+"behalten, selbst wenn nicht alle Zeichenketten übersetzt wurden. Verwenden "
+"Sie dies bitte vorsichtig, dieses Schlüsselwort wurde für sehr spezielle "
+"Zwecke hinzugenommen."
+
+#. type: =head2
+#: en/po-debconf.7.pod:276
+msgid "GIVING NOTICES TO TRANSLATORS BEFORE UPLOADING"
+msgstr "ÜBERSETZER VOR DEM UPLOAD INFORMIEREN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:278
+msgid ""
+"Usually translators notice on the status web pages (see below) that "
+"translations are outdated, and send patches which will be included in future "
+"uploads.  But developers are encouraged to ask maintainers of outdated "
+"translations for an update before an upload, for instance one week in "
+"advance.  A dedicated tool, B<podebconf-report-po>, has been written for "
+"this purpose.  Do not hesitate to abuse it!"
+msgstr ""
+"Normalerweise bemerken Übersetzer auf Status-Webseiten (siehe unten), dass "
+"Übersetzungen veraltet sind und schicken Patches, die dann in zukünftigen "
+"Uploads hinzugefügt werden. Entwickler werden aber ermutigt, die Betreuer "
+"von veralteten Übersetzungen vor einem Upload um Aktualisierungen zu bitten, "
+"zum Beispiel eine Woche vorher. Ein spezielle Werkzeug - B<podebconf-report-"
+"po> - wurde für diesen Zweck geschrieben. Zögern Sie nicht, es zu "
+"missbrauchen!"
+
+#. type: =head1
+#: en/po-debconf.7.pod:285
+msgid "DEBUGGING"
+msgstr "FEHLERSUCHE"
+
+#. type: textblock
+#: en/po-debconf.7.pod:287
+msgid ""
+"You will find that B<debconf-loadtemplate> will not accept a templates file "
+"with i18n markups.  However, it will accept a merged file, so if you have "
+"been debugging your debconf setup like this"
+msgstr ""
+"Sie werden merken, dass B<debconf-loadtemplate> keine Vorlage mit i18n-"
+"Markup akzeptiert. Allerdings akzeptiert es zusammengeführte Dateien, falls "
+"Sie also in Ihrer Debconf-Installation die Fehlersuche wie folgt "
+"durchgeführt haben"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:291
+#, no-wrap
+msgid ""
+"  rm /tmp/{config,templates}.dat{,-old}\n"
+"  debconf-loadtemplate debian/templates\n"
+"  DEBIAN_PRIORITY=low debconf -freadline debian/config configure 28.0\n"
+"\n"
+msgstr ""
+"  rm /tmp/{config,templates}.dat{,-old}\n"
+"  debconf-loadtemplate debian/templates\n"
+"  DEBIAN_PRIORITY=low debconf -freadline debian/config configure 28.0\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:295
+msgid "you will now need something like this instead:"
+msgstr "dann müssen Sie etwas der folgenden Art verwenden:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:297
+#, no-wrap
+msgid ""
+"  po2debconf debian/templates > debian/tmp/DEBIAN/templates\n"
+"  rm /tmp/{config,templates}.dat{,-old}\n"
+"  debconf-loadtemplate debian/tmp/DEBIAN/templates\n"
+"  DEBIAN_PRIORITY=low debconf -freadline debian/config configure 28.0\n"
+"\n"
+msgstr ""
+"  po2debconf debian/templates > debian/tmp/DEBIAN/templates\n"
+"  rm /tmp/{config,templates}.dat{,-old}\n"
+"  debconf-loadtemplate debian/tmp/DEBIAN/templates\n"
+"  DEBIAN_PRIORITY=low debconf -freadline debian/config configure 28.0\n"
+"\n"
+
+#. type: =item
+#: en/po-debconf.7.pod:306 en/po-debconf.7.pod:314 en/po-debconf.7.pod:332
+#: en/po-debconf.7.pod:352
+msgid "*"
+msgstr "*"
+
+#. type: textblock
+#: en/po-debconf.7.pod:308
+msgid ""
+"C<Debconf> 1.2.0 recognizes fields in the form I<Name>-I<lang>.I<encoding>, "
+"e.g. C<Description-de.ISO-8859-1> or C<Choices-ru.KOI8-R>.  By default "
+"B<po2debconf> writes templates files in that new format.  Older C<debconf> "
+"will ignore these fields, and English text is displayed.  See "
+"L<po2debconf(1)> to know how to change encoding and output format."
+msgstr ""
+"C<Debconf> 1.2.0 erkennt Felder der Form I<Name>-I<Sprache>.I<Kodierung>, z."
+"B. C<Description-de.ISO-8859-1> oder C<Choices-ru.KOI8-R>. Standardmäßig "
+"schreibt B<po2debconf> Vorlagendateien im neuen Format. Ältere C<debconf> "
+"werden diese Felder ignorieren und stattdessen wird englischer Text "
+"angezeigt. Lesen Sie L<po2debconf(1)>, um zu erfahren, wie Sie die Kodierung "
+"und das Ausgabeformat ändern können."
+
+#. type: textblock
+#: en/po-debconf.7.pod:316
+msgid ""
+"A given English string may be given only one unique translation in a given "
+"language.  It is impossible to give two different translations, depending on "
+"the context.  To solve this issue, you have to add special markups to the "
+"different occurrences of a given string to make them different.  (These "
+"markers will only be visible to translators, and they will be removed from "
+"the string before being displayed to user)"
+msgstr ""
+"Eine vorgegebene englische Zeichenkette darf nur eine eindeutige Übersetzung "
+"in einer vorgegebenen Sprache haben. Es ist unmöglich, abhängig vom Kontext "
+"zwei verschiedene Übersetzungen zu geben. Um dieses Problem zu beheben, "
+"müssen Sie spezielle Markierungen bei verschiedenem Auftreten einer "
+"gegebenen Zeichenkette hinzufügen, um diese Zeichenketten zu unterscheiden "
+"(dieses Markierungen werden nur von den Übersetzern gesehen und werden aus "
+"der Zeichenkette entfernt, bevor diese dem Benutzer angezeigt wird)."
+
+#. type: textblock
+#: en/po-debconf.7.pod:323
+msgid ""
+"Such markers must be added to the end of the strings to translate, they must "
+"start with C<[ > (a left bracket followed by a space) and end with C<]> "
+"(right bracket), and may contain any character but brackets or new lines. "
+"For example C<[ blahblah]> is a valid marker while C<[ bla[bla]bla]> isn't. "
+"For Perl regexp addicts, the markers are recognized (and removed) using this "
+"rule:"
+msgstr ""
+"Solche Markierungen müssen am Ende der zu übersetzenden Zeichenkette "
+"hinzugefügt werden, sie müssen mit C<[ > (einer öffnenden Klammer, gefolgt "
+"von einem Leerzeichen) beginnen und mit C<]> (schließende Klammer) enden, "
+"und dürfen jedes Zeichen außer Klammern oder Zeilenumbrüchen enthalten. Zum "
+"Beispiel ist C<[ blahblah]> eine gültige Markierung während "
+"C<[ bla[bla]bla]> nicht gültig ist. Für Anhänger von regulären Perl-"
+"Ausdrücken: Die Markierungen werden mittels folgender Regel erkannt (und "
+"entfernt):"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:330
+#, no-wrap
+msgid ""
+"  $msg =~ s/\\[\\s[^\\[\\]]*\\]$//s;\n"
+"\n"
+msgstr ""
+"  $msg =~ s/\\[\\s[^\\[\\]]*\\]$//s;\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:334
+msgid ""
+"Spacing is not handled exactly the same way by C<po-debconf> and C<debconf-"
+"utils>; with the latter, paragraphs are reformatted when updating and "
+"merging translations, so C<debconf-utils> is very smart and spaces are not "
+"considered as being part of strings when determining fuzzy entries.  (i.e., "
+"the ones needing translator's attention because the original changed)"
+msgstr ""
+"Leerzeichen werden in C<po-debconf> und C<debconf-utils> leicht verschieden "
+"gehandhabt; bei letzterem werden Absätze neu formatiert, wenn Übersetzungen "
+"aktualisiert und zusammengeführt werden, daher ist C<debconf-utils> sehr "
+"klug und Leerzeichen werden nicht als Teil der Zeichenketten betrachtet, "
+"wenn die unscharfen (»fuzzy«) Einträge bestimmt werden (d.h. diejenigen, die "
+"der Aufmerksamkeit der Übersetzer bedürfen, da sich das Original geändert "
+"hat)."
+
+#. type: textblock
+#: en/po-debconf.7.pod:341
+msgid ""
+"On the other hand C<po-debconf> relies on C<gettext> to detect fuzzy "
+"entries, and it does not treat spaces as special characters.  Thus "
+"superfluous spaces must be removed at end of lines in master templates "
+"files, or they will appear in PO and POT files."
+msgstr ""
+"C<po-debconf> auf der anderen Seite verlässt sich auf C<Gettext>, um "
+"unscharfe Einträge zu erkennen, und behandelt Leerzeichen nicht als "
+"besondere Zeichen. Daher müssen überflüssige Leerzeichen am Zeilenende in "
+"Master-Vorlagendateien entfernt werden, oder sie werden in PO- und POT-"
+"Dateien auftauchen."
+
+#. type: textblock
+#: en/po-debconf.7.pod:346
+msgid ""
+"For the same reason, B<debconf-gettextize> can mark text fuzzy because of "
+"mismatch with space characters, and translators have to manually unfuzzy "
+"such strings.  This only happens once when converting templates to C<po-"
+"debconf> format, unless you randomly change spaces in master templates "
+"files, which will be painful for translators."
+msgstr ""
+"Aus dem gleichen Grund, den nicht passenden Leerzeichen, kann B<debconf-"
+"gettextize> Text als unscharf markieren, und Übersetzer haben solche "
+"Zeichenketten manuell zu prüfen/aktualisieren. Dies passiert nur einmal, "
+"wenn Vorlagen in das C<po-debconf>-Format konvertiert werden, falls Sie "
+"nicht zufällige Änderungen von Leerzeichen in den Master-Vorlagendateien "
+"vornehmen, die dann für Übersetzer sehr unangenehm wären."
+
+#. type: textblock
+#: en/po-debconf.7.pod:354
+msgid ""
+"Normally the I<Default:> field must not be translated when template type is "
+"B<Select> or B<Multiselect>. Under rare circumstances (e.g. when selecting "
+"the default language for an application) localized values may be meaningful."
+msgstr ""
+"Normalerweise darf das Feld I<Default:> nicht übersetzt werden, wenn der "
+"Vorlagentyp B<Select> oder B<Multiselect> ist. Unter seltenen Umständen (z."
+"B. bei der Auswahl der Standardsprache für eine Anwendung) können angepasste "
+"Werte von Bedeutung sein."
+
+#. type: textblock
+#: en/po-debconf.7.pod:359
+msgid ""
+"The localized value must not be translated, but chosen from the English "
+"values listed in the I<Choices> field.  The best way to achieve this goal is "
+"to insert a comment in your templates file which will be copied into PO "
+"files."
+msgstr ""
+"Der angepasste Wert darf nicht übersetzt werden, sondern muss aus den "
+"englischen Werten, die im Feld I<Choices> aufgeführt sind, ausgewählt "
+"werden. Der beste Weg, um dies zu erreichen, besteht darin, ein Kommentar in "
+"Ihre Vorlagendatei einzufügen, der dann in die PO-Dateien kopiert wird."
+
+#. type: verbatim
+#: en/po-debconf.7.pod:364
+#, no-wrap
+msgid ""
+"  Template: geneweb/lang\n"
+"  Type: select\n"
+"  __Choices: Danish (da), Dutch (nl), English (en), Esperanto (eo)\n"
+"  #  You must NOT translate this string, but you can change its value.\n"
+"  #  The comment between brackets is used to distinguish this msgid\n"
+"  #  from the one in the Choices list; you do not have to worry about\n"
+"  #  them, and have to simply choose a msgstr among the English values\n"
+"  #  listed in the Choices field above, e.g. msgstr \"Dutch (nl)\"\n"
+"  _Default: English (en)[ default language]\n"
+"  _Description: Geneweb default language\n"
+"\n"
+msgstr ""
+"  Template: geneweb/lang\n"
+"  Type: select\n"
+"  __Choices: Danish (da), Dutch (nl), English (en), Esperanto (eo)\n"
+"  #  You must NOT translate this string, but you can change its value.\n"
+"  #  The comment between brackets is used to distinguish this msgid\n"
+"  #  from the one in the Choices list; you do not have to worry about\n"
+"  #  them, and have to simply choose a msgstr among the English values\n"
+"  #  listed in the Choices field above, e.g. msgstr \"Dutch (nl)\"\n"
+"  _Default: English (en)[ default language]\n"
+"  _Description: Geneweb default language\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:375
+msgid ""
+"The default value also appears in the I<Choices> field, and both have "
+"different translations: the former is an untranslated value chosen among "
+"I<Choices> values, whereas the latter is a normal translation.  As "
+"C<gettext> cannot have two different translations for the same I<msgid>, "
+"both I<msgids> must be different by using bracketed comments as described in "
+"a previous subsection."
+msgstr ""
+"Der Standardwert erscheint dann auch in dem Feld I<Choices>, und beide haben "
+"verschiedene Übersetzungen: der erstere ist ein unübersetzter Wert, der aus "
+"den I<Choices>-Werten ausgewählt wird, während der letztere eine normale "
+"Übersetzung ist. Da C<Gettext> nicht zwei verschiedene Übersetzungen für die "
+"gleiche I<msgid> haben kann, müssen sich beide I<msgids> unterscheiden, in "
+"dem Kommentare in eckigen Klammern verwendet werden, wie dies im vorherigen "
+"Abschnitt beschrieben wurde."
+
+#. type: textblock
+#: en/po-debconf.7.pod:382
+msgid ""
+"Prior to C<po-debconf> 0.8.0, such comments were not available and "
+"maintainers had to replace the I<_Default:> field by I<_DefaultChoice:> in "
+"order to highlight such fields in PO files:"
+msgstr ""
+"Vor C<po-debconf> 0.8.0 waren solche Kommentare nicht verfügbar und die "
+"Betreuer mussten das Feld I<_Default:> durch I<_DefaultChoice:> ersetzen, um "
+"solche Felder in PO-Dateien hervorzuheben:"
+
+#. type: verbatim
+#: en/po-debconf.7.pod:386
+#, no-wrap
+msgid ""
+"  #. DefaultChoice\n"
+"  msgid \"\"\n"
+"  \"English[ default: do not translate bracketed material, put your \"\n"
+"  \"own language here but UNTRANSLATED.  If it is not in the list, \"\n"
+"  \"put English (without bracketed material)]\"\n"
+"  msgstr \"\"\n"
+"  \"Swedish\"\n"
+"\n"
+msgstr ""
+"  #. DefaultChoice\n"
+"  msgid \"\"\n"
+"  \"English[ default: do not translate bracketed material, put your \"\n"
+"  \"own language here but UNTRANSLATED.  If it is not in the list, \"\n"
+"  \"put English (without bracketed material)]\"\n"
+"  msgstr \"\"\n"
+"  \"Swedish\"\n"
+"\n"
+
+#. type: textblock
+#: en/po-debconf.7.pod:394
+msgid ""
+"Plain comments in templates files are less error prone and are encouraged."
+msgstr ""
+"Einfache Kommentare in Vorlagendateien sind weniger fehlerträchtig und "
+"sollten verwendet werden."
+
+#. type: =head1
+#: en/po-debconf.7.pod:399
+msgid "STATUS WEB PAGES"
+msgstr "STATUS-WEBSEITEN"
+
+#. type: textblock
+#: en/po-debconf.7.pod:401
+msgid ""
+"Statistics for C<po-debconf> translations are available at L<http://www."
+"debian.org/intl/l10n/po-debconf/> (or from mirrors); they are automatically "
+"updated when new packages are uploaded.  Only packages shipping F<debian/po/"
+"templates.pot> and F<debian/po/POTFILES.in> files are considered, so you "
+"should make sure your source package provides them."
+msgstr ""
+"Statistiken für C<po-debconf>-Übersetzungen sind unter L<http://www.debian."
+"org/intl/l10n/po-debconf/> (oder von Spiegeln) erhältlich; sie werden "
+"automatisch nach dem Hochladen von Paketen aktualisiert. Nur Pakete, die die "
+"Dateien F<debian/po/templates.pot> und F<debian/po/POTFILES.in> enthalten, "
+"werden betrachtet. Stellen Sie daher sicher, dass Ihr Quellpaket diese "
+"bereitstellt."
+
+#. type: textblock
+#: en/po-debconf.7.pod:408
+msgid ""
+"Translators can grab PO and POT files from there, but they must always get "
+"in touch with the previous translator (her mail address can be found in the "
+"PO file) and/or their fellow translators on debian-l10n-"
+"I<E<lt>languageE<gt>>@lists.debian.org (if such a list does exist) to make "
+"sure that no one is currently working on the same translation, and read "
+"current bugreports against the package they are going to translate to see if "
+"a translation has already been reported."
+msgstr ""
+"Übersetzer können sich von dort die PO- und POT-Dateien holen, sie müssen "
+"aber immer mit dem vorherigen Übersetzer Kontakt aufnehmen (deren E-Mail-"
+"Adresse in der PO-Datei gefunden werden kann) und/oder mit ihren "
+"Mitübersetzern auf debian-l10n-I<E<lt>SpracheE<gt>>@lists.debian.org (falls "
+"eine solche Liste existiert), um sicherzustellen, dass keiner derzeit an der "
+"gleichen Übersetzung arbeitet, und aktuelle Fehlerberichte für das Paket "
+"lesen, das sie übersetzen wollen, um zu schauen, ob eine Übersetzung bereits "
+"eingereicht wurde."
+
+#. type: textblock
+#: en/po-debconf.7.pod:417
+msgid ""
+"After translating these files, they should submit their work to the "
+"maintainer as bug report of severity B<wishlist> with the B<patch> tag."
+msgstr ""
+"Nachdem sie diese Dateien übersetzt haben, sollten sie ihre Arbeit an den "
+"Betreuer mittels eines Fehlerberichts der Schwere B<wishlist> mit der "
+"Markierung B<patch> einreichen."
+
+#. type: textblock
+#: en/po-debconf.7.pod:422
+msgid ""
+"L<debconf-gettextize(1)>, L<debconf-updatepo(1)>, L<dh_installdebconf(1)>, "
+"L<podebconf-report-po(1)>, L<po2debconf(1)>, L<debconf-devel(7)>."
+msgstr ""
+"L<debconf-gettextize(1)>, L<debconf-updatepo(1)>, L<dh_installdebconf(1)>, "
+"L<podebconf-report-po(1)>, L<po2debconf(1)>, L<debconf-devel(7)>."
+
+#. type: verbatim
+#: en/po-debconf.7.pod:431
+#, no-wrap
+msgid ""
+"  Martin Quinson <Martin.Quinson@ens-lyon.fr>\n"
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"\n"
+msgstr ""
+"  Martin Quinson <Martin.Quinson@ens-lyon.fr>\n"
+"  Denis Barbier <barbier@linuxfr.org>\n"
+"\n"
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:4
+msgid ""
+"podebconf-display-po - display content of a PO file in a debconf interface"
+msgstr ""
+"podebconf-display-po - zeige Inhalte einer PO-Datei in einer Debconf-"
+"Schnittstelle"
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:8
+msgid "B<podebconf-display-po> [B<-h>] [B<-f> I<FRONTEND>] I<file.po>"
+msgstr "B<podebconf-display-po> [B<-h>] [B<-f> I<OBERFLÄCHE>] I<Datei.po>"
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:15
+msgid ""
+"As with any other localization work, translators should test their "
+"translations by running the program they are working on.  But this is a very "
+"hard job with complicated configuration scripts because there is no "
+"automatic way to have all messages displayed."
+msgstr ""
+"Wie bei jeder anderen Sprachanpassungsarbeit sollten die Übersetzer ihre "
+"Übersetzung mit dem Programm testen, an dem sie arbeiten. Bei komplizierten "
+"Konfigurationsskripten ist dies aber eine sehr schwierige Aufgabe, da es "
+"keine automatische Möglichkeit gibt, alle Nachrichten angezeigt zu bekommen."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:20
+msgid ""
+"The B<podebconf-display-po> program could be called the I<Poor Man "
+"Localization Checker> for debconf.  It parses a PO file, tries to guess what "
+"the original templates file did look like, and displays messages in a "
+"debconf interface."
+msgstr ""
+"Das Programm B<podebconf-display-po> könnte I<Standortanpasssungsprüfer des "
+"kleinen Mannes> für Debconf genannt werden. Es liest eine PO-Datei, versucht "
+"zu raten, wie die ursprüngliche Vorlagendatei ausgesehen haben könnte und "
+"zeigt die Meldungen in einer Debconf-Schnittstelle an."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:25
+msgid ""
+"Of course being root is not mandatory, and there is no interaction between "
+"B<podebconf-display-po> and system-wide debconf settings."
+msgstr ""
+"Natürlich ist es keine Voraussetzung, als root zu arbeiten, und es gibt "
+"keine Wechselwirkung zwischen B<podebconf-display-po> und systemweiten "
+"Debconf-Einstellungen."
+
+#. type: =item
+#: en/podebconf-display-po.1.pod:36
+msgid "B<-f>, B<--frontend=I<FRONTEND>>"
+msgstr "B<-f>, B<--frontend=I<OBERFLÄCHE>>"
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:38
+msgid "Select an alternate debconf frontend."
+msgstr "Wähle eine alternative Debconf-Oberfläche aus."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:48
+msgid ""
+"As B<podebconf-display-po> relies on C<debconf> to display questions, your "
+"environment must be setup to display localized questions in the language of "
+"the PO file.  If you want to check a translation in another language, you "
+"need to temporarily change your settings, e.g."
+msgstr ""
+"Da sich B<podebconf-display-po> auf C<Debconf> zur Anzeige der Fragen "
+"verlässt, muss Ihre Umgebung so eingerichtet sein, dass die übersetzten "
+"Fragen in der Sprache der PO-Datei angezeigt werden. Falls Sie die "
+"Übersetzung in eine andere Sprache überprüfen wollen, müssen Sie "
+"vorübergehend Ihre Einstellungen ändern, also z.B."
+
+#. type: verbatim
+#: en/podebconf-display-po.1.pod:54
+#, no-wrap
+msgid ""
+"  $ LANGUAGE=de podebconf-display-po de.po\n"
+"\n"
+msgstr ""
+"  $ LANGUAGE=fr podebconf-display-po fr.po\n"
+"\n"
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:56
+msgid ""
+"If the PO file cannot be converted into your current encoding, English "
+"strings are displayed instead of the localized ones.  You then have to "
+"switch to a UTF-8 environment to prevent encoding mismatch."
+msgstr ""
+"Falls die PO-Datei nicht in Ihre aktuelle Kodierung konvertiert werden kann, "
+"werden statt der übersetzten die englischen Zeichenketten angezeigt. Sie "
+"müssen dann in eine UTF-8-Umgebung wechseln, um Fehlanpassungen der "
+"Kodierung zu vermeiden."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:62
+msgid ""
+"Prior to 0.8.3, C<po-debconf> did only insert the field name in PO files.  "
+"But some discussions on mailing-lists showed that text format does depend on "
+"template type, e.g. string and boolean types are different because the "
+"former is an open question and user has to enter some text input, whereas "
+"the latter is basically a Yes/No question.  Authors have to think about it "
+"when writing their templates files, but translators also have to be aware."
+msgstr ""
+"Vor 0.8.3 fügte C<po-debconf> nur den Feldnamen in PO-Dateien ein. Aber "
+"einige Diskussionen auf Mailinglisten zeigten auf, dass das Text-Format doch "
+"vom Vorlagentyp abhängt, z.B. sind Typen für Zeichenketten und logische "
+"Werte (»boolean«) verschieden, da erstere eine offene Frage darstellt, "
+"worauf der Benutzer (freien) Text eingeben muss, während letzerer im Prinzip "
+"eine Ja/Nein-Frage darstellt. Autoren müssen darüber nachdenken, wenn sie "
+"ihre Vorlagendateien schreiben, aber den Übersetzern muss dies auch bewusst "
+"sein."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:70
+msgid ""
+"This is achieved when PO files are generated by po-debconf E<gt>= 0.8.3, "
+"template type is inserted in PO files.  With older versions, B<podebconf-"
+"display-po> has a trivial algorithm to determine original template type, and "
+"may sometimes be wrong."
+msgstr ""
+"Dies wird dadurch erreicht, dass in PO-Dateien, die durch po-debconf E<gt>= "
+"0.8.3 erstellt wurden, der Vorlagentyp eingefügt wird. Für ältere Versionen "
+"hat B<podebconf-display-po> einen einfachen Algorithmus um den "
+"ursprünglichen Vorlagentyp zu bestimmen, der allerdings manchmal daneben "
+"liegt."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:77
+msgid ""
+"The C<dialog> frontend, when based upon C<whiptail>, traps system signals "
+"and thus B<podebconf-display-po> cannot be interrupted by C<Ctrl-C> when "
+"using this frontend."
+msgstr ""
+"Die C<dialog>-Oberfläche fängt Systemsignale ab (wenn sie auf C<whiptail> "
+"basiert) und daher kann B<podebconf-display-po> bei dieser Oberfläche nicht "
+"mit C<Ctrl-C> unterbrochen werden."
+
+#. type: textblock
+#: en/podebconf-display-po.1.pod:85
+msgid "L<debconf(1)>"
+msgstr "L<debconf(1)>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:4
+msgid ""
+"podebconf-report-po - send outdated debconf PO files to the last translators"
+msgstr ""
+"podebconf-report-po - verschicke aktualisierte PO-Dateien an die letzten "
+"Übersetzer"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:8
+msgid "B<podebconf-report-po> [B<I<options>>]"
+msgstr "B<podebconf-report-po> [B<I<Optionen>>]"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:12
+msgid ""
+"This program reads a directory with po files to determine which files "
+"contain fuzzy or missing translations, launches an editor to allow "
+"modifications of mail body and headers, asks confirmation to send mails, and "
+"sends them to the last translator requesting updates.  The mail will contain "
+"the PO file which has to be updated.  B<podebconf-report-po> can be called "
+"either in the top-level directory, or in F<debian> or F<debian/po> "
+"subdirectories (or, for non debconf translations, from the B<po> directory "
+"itself or its parent directory)."
+msgstr ""
+"Dieses Programm liest ein Verzeichnis mit po-Dateien, um zu bestimmen, "
+"welche Dateien unscharfe (»fuzzy«) oder fehlende Übersetzungen enthalten, "
+"öffnet einen Editor, um den E-Mail-Textkörper und Kopfzeilen zu bearbeiten, "
+"bittet um Bestätigung zum Verschicken von E-Mails und versendet sie zum "
+"letzten Übersetzer mit der Bitte um Aktualisierung. Die E-Mail wird die PO-"
+"Datei enthalten, die aktualisiert werden muss. B<podebconf-report-po> kann "
+"entweder im obersten Verzeichnis oder in den Unterverzeichnissen F<debian> "
+"oder F<debian/po> (oder direkt vom B<po>-Verzeichnis selbst oder seinem "
+"übergeordneten Verzeichnis bei nicht-Debconf-Übersetzungen) aufgerufen "
+"werden."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:21
+msgid ""
+"B<podebconf-report-po> can also be used to send a call for translations to a "
+"mailing list.  In that case, the POT file will be attached."
+msgstr ""
+"B<podebconf-report-po> kann auch dazu verwendet werden, einen Aufruf für "
+"Übersetzungen an eine Mailinglisten zu senden. In diesem Fall wird die POT-"
+"Datei angehängt."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:24
+msgid ""
+"Different templates exist for translation update requests, request to send "
+"updated PO files to a bug report (B<--submit>) or for calls for translations "
+"(B<--call>).  The template can also be provided by the user.  See the "
+"B<TEMPLATES> section for more information on the templates."
+msgstr ""
+"Es existieren verschiedene Vorlagen für den Aufruf zur Aktualisierung, den "
+"Aufruf, aktualisierte PO-Dateien an einen Fehlerbericht zu senden (B<--"
+"submit>) oder um um Übersetzungen zu bitten (B<--call>). Die Vorlage kann "
+"auch vom Benutzer bereitgestellt werden. Lesen Sie hierzu den Abschnitt "
+"B<VORLAGEN> für weitere Informationen über Vorlagen."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:32
+msgid ""
+"Many options can be set in a configuration file.  See section "
+"B<CONFIGURATION FILE>."
+msgstr ""
+"Viele Optionen können in einer Konfigurationsdatei eingestellt werden. Lesen "
+"Sie hierzu den Abschnitt B<KONFIGURATIONSDATEI>."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:37
+msgid "B<--addlanguageteam=I<LANGUAGE>:I<LIST>>"
+msgstr "B<--addlanguageteam=I<SPRACHE>:I<LISTE>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:39
+msgid ""
+"Specify a mailing list for a given language.  This mailing list will be "
+"added to the CC list for the PO files of this language when B<--"
+"languageteam> is used, in addition to the language team specified in the PO "
+"file (if these mailing lists differ)."
+msgstr ""
+"Gibt eine Mailingliste für eine angegebene Sprache an. Diese Mailingliste "
+"wird zu der CC-Liste für die PO-Dateien dieser Sprache hinzugefügt, wenn B<--"
+"languageteam> verwendet wird, zusätzlich zu dem Sprachteam, dass in der PO-"
+"Datei angegeben ist (falls sich die Mailinglisten unterscheiden)."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:44
+msgid ""
+"This is useful to keep the specified team informed, and allow a faster "
+"reaction when a translator is known to be inactive."
+msgstr ""
+"Dies ist nützlich, falls ein spezielles Team informiert bleiben soll, und "
+"erlaubt eine schnellere Reaktion, wenn von einem Übersetzer bekannt ist, "
+"dass er inaktiv ist."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:47
+msgid ""
+"This option can be specified more than once.  The language code and language "
+"mailing list are separated by a colon."
+msgstr ""
+"Diese Option kann mehr als einmal angegeben werden. Die Sprachcodes und "
+"Sprach-Mailinglisten werden durch einen Doppelpunkt getrennt."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:50 en/podebconf-report-po.1.pod:102
+#: en/podebconf-report-po.1.pod:111 en/podebconf-report-po.1.pod:119
+#: en/podebconf-report-po.1.pod:131 en/podebconf-report-po.1.pod:146
+#: en/podebconf-report-po.1.pod:154 en/podebconf-report-po.1.pod:179
+#: en/podebconf-report-po.1.pod:187 en/podebconf-report-po.1.pod:252
+#: en/podebconf-report-po.1.pod:267 en/podebconf-report-po.1.pod:280
+#: en/podebconf-report-po.1.pod:297 en/podebconf-report-po.1.pod:310
+#: en/podebconf-report-po.1.pod:320 en/podebconf-report-po.1.pod:329
+#: en/podebconf-report-po.1.pod:340 en/podebconf-report-po.1.pod:356
+#: en/podebconf-report-po.1.pod:365
+msgid ""
+"This option can be specified in the configuration file to define default "
+"behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE> below."
+msgstr ""
+"Diese Option kann in der Konfigurationsdatei angegeben werden, um das "
+"Standardverhalten für B<podebconf-report-po> festzulegen. Lesen Sie hierzu "
+"den Abschnitt B<KONFIGURATIONSDATEI> unten."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:54
+msgid "B<--bts=I<NUMBER>>"
+msgstr "B<--bts=I<NUMMER>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:56
+msgid ""
+"After a bug report has been filed (either manually or with the B<--submit> "
+"flag) to track down translations, B<podebconf-report-po> can be run again, "
+"but this time with the B<--bts=I<NUMBER>> flag.  Translators are then "
+"requested to respect the B<Reply-To:> header field which is set to this bug "
+"report, so that all translations are gathered into a single location."
+msgstr ""
+"Nachdem ein Fehler eingereicht wurde (entweder manuell oder mit dem Schalter "
+"B<--submit>) kann B<podebconf-report-po> erneut aufgerufen werden, um "
+"Übersetzungen aufzuspüren, diesmal allerdings mit dem Schalter B<--"
+"bts=I<NUMMER>>. Übersetzer werden dann gebeten, die Kopfzeile B<Reply-To:> "
+"zu beachten, das auf diesen Fehlerbericht gesetzt wird, so dass alle "
+"Übersetzungen an einem einzigen Ort zusammenlaufen."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:63
+msgid "B<--call[=I<MAILING_LIST>]>"
+msgstr "B<--call[=I<MAILINGLISTE>]>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:65
+msgid ""
+"Send a call for translations.  If the optional I<MAILING_LIST> argument is "
+"not specified, the call for translations is sent to the Debian "
+"Internationalization list (I<debian-i18n@lists.debian.org>)."
+msgstr ""
+"Verschicke einen Aufruf für Übersetzungen. Falls das optionale Argument "
+"I<MAILINGLISTE> nicht angegeben ist, wird der Aufruf an die "
+"Internationalisierungsliste von Debian (I<debian-i18n@lists.debian.org>) "
+"geschickt."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:69
+msgid ""
+"Calls for translations are useful to receive translations in new languages."
+msgstr ""
+"Aufrufe zur Übersetzung sind hilfreich, um Übersetzungen in neue Sprachen zu "
+"erhalten."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:72
+msgid ""
+"By default, calls for translation are combined with regular requests for "
+"updates sent to translators, for the existing translations.  You can disable "
+"this default behavior with the B<--withouttranslators> option."
+msgstr ""
+"Standardmäßig werden Aufrufe zur Übersetzung mit regulären Aufrufen für "
+"Aktualisierungen an Übersetzer von existierenden Übersetzungen gekoppelt. "
+"Sie könen mit der Option B<--withouttranslators> dieses Verhalten "
+"deaktivieren."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:76
+msgid "B<--conf=I<FILE>>"
+msgstr "B<--conf=I<DATEI>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:78
+msgid ""
+"Specify the configuration file.  By default, B<podebconf-report-po> reads F<"
+"$HOME/.podebconf-report-po.conf>."
+msgstr ""
+"Spezifiziert die Konfigurationsdatei. Standardmäßig liest B<podebconf-report-"
+"po> F<$HOME/.podebconf-report-po.conf>."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:82
+msgid "B<--noconf>"
+msgstr "B<--noconf>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:84
+msgid "Do not read any configuration file."
+msgstr "Lese keine Konfigurationsdatei."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:86
+msgid "B<--deadline=I<DEADLINE>>"
+msgstr "B<--deadline=I<EINSENDESCHLUSS>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:88
+msgid ""
+"Specify the deadline for receiving the updated translations (default is no "
+"deadline)."
+msgstr ""
+"Gibt den Einsendeschluss für den Empfang aktualisierter Übersetzungen an "
+"(standardmäßig wird kein Einsendeschluss angegeben)."
+
+#. type: verbatim
+#: en/podebconf-report-po.1.pod:91
+#, no-wrap
+msgid ""
+"This should be a date, which will be prefixed by:\n"
+" The deadline for receiving the updated translation is\n"
+" I<DEADLINE>.\n"
+"\n"
+msgstr ""
+"Dies sollte ein Datum sein. Davor wird folgender Text gestellt:\n"
+" The deadline for receiving the updated translation is\n"
+" I<EINSENDESCHLUSS>.\n"
+"\n"
+"Auf Deutsch entspricht dies:\n"
+" Der Einsendeschluss für den Empfang von aktualisierten Übersetzungen ist\n"
+" I<EINSENDESCHLUSS>.\n"
+"\n"
+
+#. type: verbatim
+#: en/podebconf-report-po.1.pod:95
+#, no-wrap
+msgid ""
+"If the specified string starts with a '+', it will be interpreted by:\n"
+" LC_ALL=C date -R -d I<DEADLINE>\n"
+"\n"
+msgstr ""
+"Falls die angegebene Zeichenkette mit einem »+« beginnt, wird sie von\n"
+" LC_ALL=C date -R -d I<EINSENDESCHLUSS>\n"
+"interpretiert.\n"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:98
+msgid ""
+"If no deadline is specified (and the B<--nodeadline> option is not used), a "
+"deadline will be prompted to the user, proposing a default deadline set to "
+"+10days."
+msgstr ""
+"Falls kein Einsendeschluss angegeben (und die Option B<--nodeadline> nicht "
+"verwandt) wird, wird der Benutzer um die Angabe eines Einsendeschlusses "
+"gebeten, wobei der Vorgabewert auf »+10days« gesetzt wird."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:106
+msgid "B<--nodeadline>"
+msgstr "B<--nodeadline>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:108
+msgid ""
+"Deactivate the deadline indication to translators, and avoid the deadline "
+"prompts."
+msgstr ""
+"Deaktiviere die Einsendeschlussangabe für Übersetzer und vermeide die "
+"Abfrage des Einsendeschlusses."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:115
+msgid "B<--default>"
+msgstr "B<--default>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:117
+msgid "Do not open the editor and use the template as is."
+msgstr "Öffne keinen Editor und verwende die Vorlage so wie sie ist."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:123
+msgid "B<--nodefault>"
+msgstr "B<--nodefault>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:125
+msgid "Open an editor before sending the email(s)."
+msgstr "Öffne einen Editor vor dem Versand der E-Mail(s)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:127
+msgid "B<-f>, B<--force>"
+msgstr "B<-f>, B<--force>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:129
+msgid "Send the email(s) without confirmation."
+msgstr "Verschicke E-Mail(s) ohne Bestätigung."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:135
+msgid "B<--noforce>"
+msgstr "B<--noforce>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:137
+msgid "Ask for confirmation before sending email(s)."
+msgstr "Frage vor dem Versand von E-Mail(s) um Bestätigung."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:139
+msgid "B<--from=I<FROM>>"
+msgstr "B<--from=I<VON>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:141
+msgid ""
+"Specify the name and the email address of the sender (default is taken from "
+"the B<DEBEMAIL> and B<DEBFULLNAME> environment variables, or from the "
+"B<EMAIL> environment variable, or is set to the package maintainer if these "
+"variables are not set)."
+msgstr ""
+"Gibt den Namen und die E-Mail-Adresse des Absenders an (die Vorgaben werden "
+"aus den Umgebungsvariablen B<DEBEMAIL> und B<DEBFULLNAME> entnommen, oder "
+"aus der Umgebungsvariablen B<EMAIL>, oder werden auf den Paketbetreuer "
+"gesetzt, falls diese Variablen nicht definiert sind)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:150
+msgid "B<--gzip>"
+msgstr "B<--gzip>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:152
+msgid "Compress PO files in attachment with C<gzip>."
+msgstr "Komprimiere PO-Dateien im Anhang mit C<gzip>."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:158
+msgid "B<--nogzip>"
+msgstr "B<--nogzip>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:160
+msgid "Do not compress PO files."
+msgstr "Komprimiere PO-Dateien nicht."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:164
+msgid "Print usage information and exit."
+msgstr "Zeigt Benutzungshinweise und und beendet sich."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:166
+msgid "B<--langs=I<LANGUAGES>>"
+msgstr "B<--langs=I<SPRACHEN>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:168
+msgid ""
+"Specify a list of languages to restrict sending the notification only for "
+"these languages.  The list of languages is comma separated. The PO files "
+"must be named according to these languages, with the .po extension."
+msgstr ""
+"Gibt eine Liste von Sprachen an, auf die der Versand von Benachrichtigungen "
+"beschränkt werden soll. Die Sprachen werden in der Liste durch Kommata "
+"getrennt. Die PO-Dateien müssen entsprechend der Sprachen benannt sein, mit "
+"der Endung ».po«."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:173
+msgid "B<--languageteam>"
+msgstr "B<--languageteam>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:175
+msgid "Send the email also to the Language Team as carbon copy."
+msgstr "Schicke die E-Mail als Durchschrift (CC) auch an das Sprachteam."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:177
+msgid "It is enabled by default."
+msgstr "Dies ist standardmäßig aktiviert."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:183
+msgid "B<--nolanguageteam>"
+msgstr "B<--nolanguageteam>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:185
+msgid "Do not send the email(s) to the language teams."
+msgstr "Schicke keine E-Mail(s) an das Sprachteam."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:191
+msgid "B<--mutt>"
+msgstr "B<--mutt>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:193
+msgid ""
+"Send the mails with mutt.  This set the B<--postpone> argument to F<$HOME/"
+"postponed>."
+msgstr ""
+"Verschicke die E-Mails mit Mutt. Dies setzt das Argument B<--postpone> auf F<"
+"$HOME/postponed>."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:196
+msgid "B<--notdebconf>"
+msgstr "B<--notdebconf>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:198
+msgid ""
+"Indicate that it is not a debconf translation.  B<podebconf-report-po> will "
+"use the F<translator-po>, F<call-po>, or F<submit-po> template (if no other "
+"templates are requested in the configuration file or in the command line).  "
+"These templates do not mention debconf in the subject or mail body and are "
+"more suitable for non-debconf translations."
+msgstr ""
+"Zeige an, dass dies keine Debconf-Übersetzung ist. B<podebconf-report-po> "
+"wird die Vorlagen F<translator-po>, F<call-po> oder F<submit-po> verwenden "
+"(falls keine anderen Vorlagen in der Konfigurationsdatei oder auf der "
+"Kommandozeile angefordert wurden). Dieses Vorlagen erwähnen Debconf nicht im "
+"Betreff oder im Text der E-Mail und sind für nicht-Debconf-Übersetzungen "
+"besser geeignet."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:205
+msgid ""
+"This option also changes the default F<po> directory used by B<podebconf-"
+"report-po> (i.e. the B<--podir> option is not needed when the call is done "
+"from the F<po> directory itself or from its parent directory)."
+msgstr ""
+"Diese Option ändert auch die standardmäßig von B<podebconf-report-po> "
+"verwandte F<po>-Verzeichnis (d.h. die Option B<--podir> wird nicht benötigt, "
+"wenn der Aufruf vom F<po>-Verzeichnis selbst oder von seinem Eltern-"
+"Verzeichnis aus erfolgt)."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:209
+msgid ""
+"By default, a F<debian/po> directory is preferred over a F<po> directory.  "
+"With this option, only the F<po> directory will be considered."
+msgstr ""
+"Standardmäßig wird das Verzeichnis F<debian/po> gegenüber dem Verzeichnis "
+"F<po> bevorzugt. Mit dieser Option wird nur das Verzeichnis F<po> betrachtet."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:212
+msgid ""
+"This option is usually not necessary. B<podebconf-report-po> tries to "
+"determine the type of translation based on the current directory and the "
+"existence of a F<debian/po> or F<po> directory."
+msgstr ""
+"Diese Option ist normalerweise nicht notwendig. B<podebconf-report-po> "
+"versucht die Art der Übersetzung basierend auf dem aktuellen Verzeichnis und "
+"dem Vorhandensein der Verzeichnisse F<debian/po> oder F<po> herauszufinden."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:216
+msgid "B<--package=I<PACKAGE>>"
+msgstr "B<--package=I<PAKET>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:218
+msgid "Specify the name of the package (default is the source package name)."
+msgstr ""
+"Gibt den Namen des Pakets an (standardmäßig den Namen des Quellpakets)."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:222
+msgid ""
+"Specify where the PO files are located.  By default, B<podebconf-report-po> "
+"checks if it is called from a F<po> directory, or it searches for a F<debian/"
+"po> directory (this can be disabled with the B<--notdebconf> option), or for "
+"a F<po> directory."
+msgstr ""
+"Gibt an, wo sich die PO-Dateien befinden. Standardmäßig prüft B<podebconf-"
+"report-po>, ob es von einem F<po>-Verzeichnis aus aufgerufen wurde oder es "
+"durchsucht das Verzeichnis F<debian/po> (dies kann mit der Option B<--"
+"notdebconf> deaktiviert werden) oder das Verzeichnis F<po>."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:227
+msgid "B<--postpone=I<MBOX>>"
+msgstr "B<--postpone=I<MBOX>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:229
+msgid ""
+"Do not send emails, append them in I<MBOX>.  This file can be used as a "
+"postponed mailbox with B<mutt -p>."
+msgstr ""
+"Verschicke keine E-Mails, sondern hänge sie an I<MBOX> an. Diese Datei kann "
+"als Mailbox mit zurückgestellten E-Mails für B<mutt -p> verwendet werden."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:232
+msgid "B<--potfile=I<POTFILE>>"
+msgstr "B<--potfile=I<POT-DATEI>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:234
+msgid ""
+"Specify the POT file to send to a call for translations (B<--call>).  By "
+"default, B<podebconf-report-po> uses the POT file of the PO files directory, "
+"if there is only one."
+msgstr ""
+"Gibt die POT-Datei an, die beim Aufruf für Übersetzungen (B<--call>) "
+"verschickt werden soll. Standardmäßig verwendet B<podebconf-report-po> die "
+"POT-Datei des PO-Dateien-Verzeichnisses, falls nur eine existiert."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:238
+msgid ""
+"This file is also used to find the package's name and version, if none were "
+"specified with an option, and if no F<debian/changelog> files were found."
+msgstr ""
+"Diese Datei wird auch dazu verwandt, um den Paketnamen und die -version "
+"herauszufinden, falls diese nicht per Option angegeben wurden und keine "
+"F<debian/changelog>-Dateien gefunden wurden."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:242
+msgid "B<--sendmessage>"
+msgstr "B<--sendmessage>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:244
+msgid ""
+"Only send a message, with no attachments.  This can be useful when the "
+"translators have a commit access to the package repository."
+msgstr ""
+"Schicke nur eine Nachricht, ohne Anhänge. Dies kann nützlich sein, wenn die "
+"Übersetzer Schreibzugriff auf das Paketdepot haben."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:248
+msgid "B<--smtp=I<SERVER>>"
+msgstr "B<--smtp=I<SERVER>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:250
+msgid "Specify SMTP server for mailing (default is C<localhost>)."
+msgstr ""
+"Gibt den SMTP-Server für den E-Mail-Versand an (standardmäßig C<localhost>)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:256
+msgid "B<--submit>"
+msgstr "B<--submit>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:258
+msgid ""
+"Instead of sending mails to translators, file a bug report against this "
+"package to request for translations.  This is useful e.g. when preparing non-"
+"maintainer uploads to make sure that translations do not get lost."
+msgstr ""
+"Statt E-Mails an Übersetzer zu verschicken, reiche einen Fehlerbericht gegen "
+"das Paket mit der Bitte um Übersetzungen ein. Dies ist nützlich, falls Sie z."
+"B. einen »non-maintainer«-Upload vorbereiten und sicherstellen wollen, dass "
+"Übersetzungen nicht verloren gehen."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:262
+msgid "B<--summary>"
+msgstr "B<--summary>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:264
+msgid ""
+"Send a status report to the maintainer with the list of emails sent to "
+"translators."
+msgstr ""
+"Schicke einen Statusbericht an den Betreuer mit einer Liste von E-Mails, die "
+"an die Übersetzer gesandt wurden."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:271
+msgid "B<--nosummary>"
+msgstr "B<--nosummary>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:273
+msgid "Do not send any status report to the maintainer."
+msgstr "Schicke keinen Statusbericht an den Betreuer."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:275
+msgid "B<--utf8>"
+msgstr "B<--utf8>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:277
+msgid ""
+"Send the email in UTF-8.  This allow non-ascii characters in the mail body "
+"and mail header.  The editor must support UTF-8."
+msgstr ""
+"Verschicke E-Mails in UTF-8. Dies erlaubt nicht-ASCII-Zeichen in dem E-Mail-"
+"Text und den E-Mail-Kopfzeilen. Der Editor muss UTF-8 unterstützen."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:284
+msgid "B<--noutf8>"
+msgstr "B<--noutf8>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:286
+msgid ""
+"Send the email(s) in us-ascii.  Non-ascii characters are replaced by a "
+"question mark."
+msgstr ""
+"Verschicke die E-Mail(s) in US-ASCII. Nicht-ASCII-Zeichen werden durch ein "
+"Fragezeichen ersetzt."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:289
+msgid "B<--version>"
+msgstr "B<--version>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:291
+msgid "Print version information and exit."
+msgstr "Zeigt Versions-Informationen an und beendet sich."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:295
+msgid "Display additional information while running."
+msgstr "Zeige zusätzliche Informationen zur Laufzeit an."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:301
+msgid "B<--noverbose>"
+msgstr "B<--noverbose>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:303
+msgid "Do not use the verbose mode."
+msgstr "Verwende nicht den ausführlichen Modus."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:305
+msgid "B<--templatecall=I<TEMPLATE>>"
+msgstr "B<--templatecall=I<VORLAGE>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:307
+msgid ""
+"Specify a file to use as a template for the call for translations email(s).  "
+"The default template is F</usr/share/po-debconf/templates/call>."
+msgstr ""
+"Gibt die Datei an, die als Vorlage für die E-Mails für den Aufruf um "
+"Übersetzungen verwendet wird. Standardmäßig wird F</usr/share/po-debconf/"
+"templates/call> verwendet."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:314
+msgid "B<--templatesubmit=I<TEMPLATE>>"
+msgstr "B<--templatesubmit=I<VORLAGE>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:316
+msgid ""
+"Specify a file to use as a template for the email(s) sent to translators "
+"when the B<--submit> option is used.  The default template is F</usr/share/"
+"po-debconf/templates/submit>."
+msgstr ""
+"Gibt die Datei an, die als Vorlage für die E-Mail(s) an die Übersetzer "
+"verwendet werden soll, wenn die Option B<--submit> verwendet wird. "
+"Standardmäßig wird F</usr/share/po-debconf/templates/submit> verwendet."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:324
+msgid "B<--templatetranslators=I<TEMPLATE>>"
+msgstr "B<--templatetranslators=I<VORLAGE>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:326
+msgid ""
+"Specify a file to use as a template for the email(s) sent to translators.  "
+"The default template is F</usr/share/po-debconf/templates/translators>."
+msgstr ""
+"Gibt die Datei an, die als Vorlage für die E-Mail(s) an die Übersetzer "
+"verwendet werden soll. Standardmäßig wird F</usr/share/po-debconf/templates/"
+"translators> verwendet."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:333
+msgid "B<--template=I<TEMPLATE>>"
+msgstr "B<--template=I<VORLAGE>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:335
+msgid ""
+"Specify file to use it as template for the email(s).  If a template is "
+"specified with this option, this template will be used rather than a "
+"template specified with any of the B<--templatetranslators>, B<--"
+"templatesubmit>, or B<--templatecall> options."
+msgstr ""
+"Gibt die Datei an, die als Vorlage für die E-Mails verwendet wird. Falls mit "
+"dieser Option eine Vorlage angegeben wird, wird diese Vorlage verwendet, "
+"statt der mit den Optionen B<--templatetranslators>, B<--templatesubmit> "
+"oder B<--templatecall> eigentlich verwendeten Vorlage."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:344
+msgid "B<--notemplate>"
+msgstr "B<--notemplate>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:346
+msgid "Use the default template."
+msgstr "Verwende die Standardvorlage."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:348
+msgid "B<--withtranslators>"
+msgstr "B<--withtranslators>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:350
+msgid ""
+"Send requests for updates to the translators after sending the call for "
+"translation."
+msgstr ""
+"Schicke Bitten um Aktualisierungen an die Übersetzer, nachdem der Aufruf zur "
+"Übersetzung verschickt ist."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:353
+msgid ""
+"This option is ignored when the B<--call> option is not specified.  It is "
+"enabled by default."
+msgstr ""
+"Diese Option wird ignoriert, wenn die Option B<--call> nicht angegeben wird. "
+"Sie ist standardmäßig aktiviert."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:360
+msgid "B<--withouttranslators>"
+msgstr "B<--withouttranslators>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:362
+msgid ""
+"Do not send requests for translation update to the translators after a call "
+"for translations."
+msgstr ""
+"Verschicke keine Bitte um Übersetzungsaktualisierung nach dem Aufruf für "
+"neue Übersetzungen."
+
+#. type: =head1
+#: en/podebconf-report-po.1.pod:371
+msgid "CONFIGURATION FILE"
+msgstr "KONFIGURATIONSDATEI"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:373
+msgid ""
+"By default, B<podebconf-report-po> reads F<$HOME/.podebconf-report-po."
+"conf>.  The configuration file can be set with the B<--conf> option.  You "
+"can also ignore any configuration file by specifying the B<--noconf> "
+"option.  Command line options can be used to override configuration file "
+"settings."
+msgstr ""
+"Standardmäßig liest B<podebconf-report-po> F<$HOME/.podebconf-report-po."
+"conf>. Diese Konfigurationsdatei kann mit der Option B<--conf> eingestellt "
+"werden. Sie können auch alle Konfigurationsdateien mit der Option B<--"
+"noconf> ignorieren. Kommandozeilenoptionen können zum Überschreiben der "
+"Einstellungen von Konfigurationsdateien verwendet werden."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:380
+msgid ""
+"The configuration files accept most of the command line options, without the "
+"leading B<-->: B<deadline>, B<nodeadline>, B<smtp>, B<from>, B<verbose>, "
+"B<force>, B<templatetranslators>, B<templatesubmit>, B<templatecall>, "
+"B<template>, B<default>, B<gzip>, B<languageteam>, B<nolanguageteam>, "
+"B<addlanguageteam>, B<summary>, B<utf8>, B<withouttranslators>, "
+"B<withtranslators>."
+msgstr ""
+"Die Konfigurationsdatei akzeptiert die meisten Kommandozeilenoptionen (ohne "
+"die führenden B<-->): B<deadline>, B<nodeadline>, B<smtp>, B<from>, "
+"B<verbose>, B<force>, B<templatetranslators>, B<templatesubmit>, "
+"B<templatecall>, B<template>, B<default>, B<gzip>, B<languageteam>, "
+"B<nolanguageteam>, B<addlanguageteam>, B<summary>, B<utf8>, "
+"B<withouttranslators>, B<withtranslators>."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:402
+msgid ""
+"Lines starting by a number sign (possibly preceded by spaces) are comments "
+"and are ignored."
+msgstr ""
+"Zeilen, die mit einem Nummern-Zeichen beginnen (möglicherweise mit "
+"Leerzeichen davor) sind Kommentare und werden ignoriert."
+
+#. type: verbatim
+#: en/podebconf-report-po.1.pod:405
+#, no-wrap
+msgid ""
+"Here is an example:\n"
+" # This is a comment\n"
+" smtp smtp.mydomain\n"
+" from = Me Myself <me@mydomain>\n"
+" utf8\n"
+"\n"
+msgstr ""
+"Hier ist ein Beispiel:\n"
+" # Dies ist ein Kommentar\n"
+" smtp smtp.meine-domain\n"
+" from = Mir Selbst <mir@mydomain>\n"
+" utf8\n"
+"\n"
+
+#. type: =head1
+#: en/podebconf-report-po.1.pod:411
+msgid "TEMPLATES"
+msgstr "VORLAGEN"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:413
+msgid ""
+"The templates specified with the B<--template>, B<--templatetranslators>, "
+"B<--templatesubmit>, or B<--templatecall> options can contain the following "
+"tags:"
+msgstr ""
+"Die Vorlage, die mit den Optionen B<--template>, B<--templatetranslators>, "
+"B<--templatesubmit> oder B<--templatecall> angegeben wird, darf die "
+"folgenden Markierungen enthalten:"
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:419
+msgid "B<<from>>, B<<subject>>, B<<reply-to>>"
+msgstr "B<<from>>, B<<subject>>, B<<reply-to>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:421
+msgid "Replaced by the corresponding headers of the email(s)."
+msgstr "Ersetzt durch die entsprechenden Kopfzeilen der E-Mails(s)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:423
+msgid "B<<filelist>>"
+msgstr "B<<filelist>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:425
+msgid ""
+"In the default mode, it is replaced by comments showing the list of "
+"translators with outdated translations."
+msgstr ""
+"Im Standardmodus wird dies durch eine Liste von Übersetzern mit veralteten "
+"Übersetzungen ersetzt."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:428
+msgid ""
+"In the B<--submit> mode, it is replaced by the list of PO files with "
+"outdated translations."
+msgstr ""
+"Im B<--submit>-Modus wird dies durch eine Liste von PO-Dateien mit "
+"veralteten Übersetzungen ersetzt."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:431
+msgid ""
+"And in the B<--call> mode, it is replaced by the list of PO files found in "
+"the PO directory."
+msgstr ""
+"Und im B<--call>-Modus wird dies durch eine Liste von PO-Dateien ersetzt, "
+"die im PO-Verzeichnis gefunden wurden."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:434
+msgid "B<<reply>>"
+msgstr "B<<reply>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:436
+msgid ""
+"Replaced by a string that indicates how the translators have to reply (e.g. "
+"follow the I<Reply-To> tag or sending the PO to a given bug report)."
+msgstr ""
+"Ersetzt durch eine Zeichenkette, die anzeigt, wie Übersetzer antworten "
+"sollen (z.B. indem sie die I<Reply-To>-Einstellung befolgen oder indem sie "
+"die PO-Datei an einen bestimmten Fehlerbericht senden)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:439
+msgid "B<<deadline>>"
+msgstr "B<<deadline>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:441
+msgid ""
+"Replaced by a string indicating the deadline for the translation (see B<--"
+"deadline>)."
+msgstr ""
+"Ersetzt durch eine Zeichenkette, die den Einsendeschluss für Übersetzungen "
+"(siehe B<--deadline>) angibt."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:444
+msgid "B<<package>>"
+msgstr "B<<package>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:446
+msgid "Replaced by the name of the package (if it was detected)."
+msgstr "Ersetzt durch den Paketnamen (falls dieser erkannt wurde)."
+
+#. type: =item
+#: en/podebconf-report-po.1.pod:448
+msgid "B<<statistics>>"
+msgstr "B<<statistics>>"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:450
+msgid ""
+"Replaced by the statistics of the PO files found in the PO directory (in the "
+"B<--call> mode only)."
+msgstr ""
+"Ersetzt durch die Statistiken, die in den PO-Datei im PO-Verzeichnis "
+"gefunden werden (nur im B<--call>-Modus)."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:455
+msgid ""
+"The F</usr/share/po-debconf/templates> directory contains the default "
+"templates."
+msgstr ""
+"Das Verzeichnis F</usr/share/po-debconf/templates> enthält die Standard-"
+"Vorlagen."
+
+#. type: =head1
+#: en/podebconf-report-po.1.pod:458
+msgid "EXAMPLES"
+msgstr "BEISPIELE"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:460
+msgid ""
+"The recommended usage is to call B<podebconf-report-po> from the F<po> "
+"directory to be updated:"
+msgstr ""
+"Es wird empfohlen, B<podebconf-report-po> von dem zu aktualisierenden F<po>-"
+"Verzeichnis aus aufzurufen."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:463
+msgid "podebconf-report-po --call"
+msgstr "podebconf-report-po --call"
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:465
+msgid ""
+"This will send a call for new translations to the <debian-i18n@lists.debian."
+"org> mailing list and will ask translation updates to the previous "
+"translators. The language teams will also be notified and should be able to "
+"react if the assigned translator is known to be MIA."
+msgstr ""
+"Dies wird einen Aufruf für neu Übersetzungen an die Mailingliste <debian-"
+"i18n@lists.debian.org> senden und bisherige Übersetzer um Aktualisierungen "
+"bitten. Die Sprachteams werden auch benachrichtigt und sollten in der Lage "
+"sein, zu reagieren, falls der zugewiesene Übersetzer bekanntermaßen MIA "
+"(inaktiv) ist."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:471
+msgid ""
+"A prompt will ask a deadline to the user (the default is to request "
+"translations and updates within 10 days)."
+msgstr ""
+"Eine Eingabeaufforderung wird um den Einsendeschluss bitten (standardmäßig "
+"wird um Übersetzungen und Aktualisierungen innerhalb von 10 Tagen gebeten)."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:474
+msgid ""
+"Then an editor will display the message to be sent to the mailing list.  "
+"When this editor exits, B<podebconf-report-po> will ask confirmation to send "
+"the mail to the mailing list."
+msgstr ""
+"Dann wird ein Editor die an die Mailingliste zu versendende Nachricht "
+"anzeigen. Nach Beenden dieses Editors wird B<podebconf-report-po> um "
+"Bestätigung des Versands dieser E-Mail an die Mailingliste bitten."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:478
+msgid ""
+"If confirmed, another editor will display the message to be sent to the "
+"translators and language teams.  B<podebconf-report-po> will ask for another "
+"confirmation to send the mails to translators and language teams."
+msgstr ""
+"Falls bestätigt wird ein weiterer Editor die an die Übersetzer und "
+"Sprachteams zu versendende Nachricht anzeigen. B<podebconf-report-po> wird "
+"um eine weitere Bestätigung bitten, diese E-Mails an die Übersetzer und "
+"Sprachteams zu versenden."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:483
+msgid ""
+"You should make a new release with the received translations after the "
+"deadline."
+msgstr ""
+"Nach dem Einsendeschluss sollten Sie eine neue Veröffentlichung mit den "
+"erhaltenen Übersetzungen durchführen."
+
+#. type: textblock
+#: en/podebconf-report-po.1.pod:488
+msgid "L<debconf-updatepo(1)>"
+msgstr "L<debconf-updatepo(1)>"
+
+#. type: verbatim
+#: en/podebconf-report-po.1.pod:492
+#, no-wrap
+msgid ""
+"  Fabio Tranchitella <kobold@kobold.it>\n"
+"\n"
+msgstr ""
+"  Fabio Tranchitella <kobold@kobold.it>\n"
+"\n"
+
+#~ msgid ""
+#~ "Basically when a choices list never changes, C<_Choices> is fine, but "
+#~ "otherwise C<__Choices> will ease translator's life."
+#~ msgstr ""
+#~ "Kurz gesagt, wenn sich eine Auswahlliste nie ändert, ist C<_Choices> gut "
+#~ "geeignet, andernfalls erleichtert C<__Choices> das Leben der Übersetzer."
+
+#~ msgid "B<debconf templates>"
+#~ msgstr "B<Debconf-Vorlagen>"
+
+#~ msgid "B<program translations>"
+#~ msgstr "B<Programmübersetzungen>"
+
+#~ msgid "podebconf-report-po --call --notdebconf"
+#~ msgstr "podebconf-report-po --call --notdebconf"

@@ -1,0 +1,141 @@
+
+=head1 NAME
+
+debconf-gettextize - extract translations of debconf templates into PO files
+
+=head1 SYNOPSIS
+
+B<debconf-gettextize>
+[B<-v>] [B<-h>]
+[B<--podir=I<DIR>>]
+[B<--choices>]
+[B<--merge>]
+I<master> [I<master> ...]
+
+=head1 DESCRIPTION
+
+The F</var/lib/dpkg/info/*.templates> files read by debconf contain English
+text and translations in the same file.  But in source packages, translations
+are managed in separate files to help translators.  In the initial
+implementation, a master F<templates> file contained only English text, and
+F<templates.I<xx>> files contained both original and translated strings for the
+language I<xx>.  The B<debconf-mergetemplate> program was merging master and
+translated templates files.
+
+The new implementation with C<po-debconf> is based on C<gettext>.  Maintainers
+mark translatable fields by prepending them with an underscore, English strings
+are automatically extracted into a POT file, translators work on normal PO
+files, and B<po2debconf> generates a merged templates file with the same
+structure.
+
+The B<debconf-gettextize> program was initially designed to help migrating to
+the new implementation.
+
+=over 2
+
+=item
+
+It reads a list of master files and their associated
+translations, and generates F<po/*.po> files for each language containing
+translated strings.
+
+=item
+
+Each input file receives an C<.old> suffix, and a new master file
+overwrites the old one; it is identical to the previous master
+file except that
+an underscore is prepended to translatable fields.
+Developers can then choose which fields translators have to work on and
+which ones are skipped because their values are not locale-dependent.
+
+=item
+
+A F<po/POTFILES.in> file is also created, it contains the list of F<templates>
+files B<debconf-updatepo> has to process.
+
+=back
+
+Typically the B<debconf-gettextize> program must be run only once when
+transforming from the first implementation to the C<po-debconf> format, but
+it can also be used afterwards to transform a C<_Choices> field into C<__Choices>
+(or vice-versa) without losing translations, when using the C<--merge> flag
+(alongside with C<--choices> or not).
+The desired template containing the C<_Choices> or C<__Choices> fields to modify
+has to be copied into a temporary template file, which is passed 
+to B<debconf-gettextize> as an argument.
+Then the following steps are performed:
+
+=over 3
+
+=item 1.  
+
+B<po2debconf> is run on this template file to generate a translated templates file.
+
+=item 2.
+
+This translated templates file is processed as described above and PO files are
+generated.
+
+=item 3.
+
+Newly created PO files are merged with existing ones.
+
+=back
+
+When PO files are merged, C<_Choices> fields have to be replaced by C<__Choices>
+(or vice-versa) in the original templates file before running B<debconf-updatepo>,
+otherwise new translations will be fuzzy.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-h>, B<--help>
+
+Display a usage summary for the program and exit.
+
+=item B<-v>, B<--verbose>
+
+Process in verbose mode.
+
+=item B<--podir=I<DIR>>
+
+Set directory for PO files.  Default is to search for PO files in the F<po>
+subdirectory below the location of the first master file.
+
+=item B<--choices>
+
+By default, B<debconf-gettextize> replaces C<Choices> fields by
+C<_Choices>.  With this flag, C<__Choices> fields are written
+instead.
+
+=item B<--merge>
+
+When this flag is set, the strings are merged with existing PO files.
+The templates files and F<po/POTFILES.in> are not modified.
+
+=back
+
+=head1 CAVEATS
+
+The C<Default> field is special when template type is C<Select> or
+C<Multiselect>, because a value has to be chosen amongst the B<English>
+list of choices, even for localized values.  Normally this field
+must not be changed, but in rare circumstances localized values
+are meaningful (e.g. to choose the default language of an application).
+In order to let translators know that this localized C<Default> field is
+special, you must by convention call it C<_DefaultChoice> instead of
+C<_Default>.
+
+=head1 SEE ALSO
+
+L<debconf-updatepo(1)>,
+L<po2debconf(1)>,
+L<debconf-devel(7)>,
+L<po-debconf(7)>.
+
+=head1 AUTHORS
+
+  Denis Barbier <barbier@linuxfr.org>
+  Martin Quinson <martin.quinson@ens-lyon.fr>
+

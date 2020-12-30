@@ -1,0 +1,99 @@
+
+  General notes for translators:
+
+     1.  Before starting a translation, always check with your fellow
+         translators on debian-l10n-<language>@lists.debian.org (if
+         such a list does exist) to make sure that noone is currently
+         working on the same translation, and read current bugreports
+         against the package you are going to translate to see if a
+         translation has already been reported.
+
+     2.  If you want to update a translation, please always contact
+         the previous translator in order to prevent duplication of
+         work.  Mail addresses can be found in the PO file.
+
+     3.  To start a new translation, copy the templates.pot file into
+         <xx>.po, where <xx> is the ISO code of your language.  Then
+         specify in the first msgstr the charset used for translated
+         strings, and also put any useful piece of information.
+
+     4.  Any general text editor can be used to work on PO files, and
+         there are some specific tools like gtranslator or kbabel
+         which can be helpful if you are not familiar with PO files.
+         Gettext documentation contains explanations about the PO file
+         format, and you must read at least the 'Filling in the Header
+         Entry' and 'The Format of PO Files' sections.
+
+     5.  When you have finished your translation, always reread your
+         file at least once to correct all meaning, spelling, grammar,
+         typo and other mistakes.  (Maybe your PO editor does include
+         a spellchecker or a translation helper like acheck).
+         Next run
+            msgfmt -c -v -o /dev/null <YOUR_LANGUAGE_CODE>.po
+         to check that your file is valid and will be integrated
+         without trouble.
+         Depending on your language team policy, you may also send
+         your translation to your dedicated l10n list so that it gets
+         reviewed.
+
+     6.  When your translation is finished and valid, file a bugreport
+         against the package being translated, severity minor.  Tag
+         your report with 'l10n' and 'patch' marks, add "[INTL:xx]"
+         (where xx is the ISO code of your language) to the subject to
+         help further searches, ask politely that your translation
+         gets included, give maintainer instructions on what to do
+         with this file (e.g. "Please copy the attachment into
+         debian/po/cs.po") and do not forget to attach your
+         translation.  This step can be very easily performed with the
+         reportbug utility.
+
+  Notes specific to po-debconf:
+
+     1.  The field name is displayed in comments before msgid.
+         Default values are special for debconf, because when
+         template type is 'Select' or 'Multiselect', they must *not*
+         be translated, but their values may be changed (in rare
+         curcumstances) to another string listed in the English
+         Choices field.  For this reason, developers should use
+         DefaultChoice instead of Default in order to prevent
+         confusion.
+         THIS IS A PO-DEBCONF EXTENSION.
+         In the generated templates file, Default will of course be
+         printed, since debconf does not define this DefaultChoice
+         field.
+
+     2.  Because instructions for translators may be inserted by
+         developers, you must ensure that the tool you are using
+         is able to display (without corruption) these comments.
+         See for instance instructions to handle language selection
+         in the geneweb package.
+
+     3.  Sometimes msgids are identical whereas msgstr could have
+         different values.  In order to make msgids unique, some
+         special text can be inserted at the end of the string, more
+         precisely any sequence of
+             + a left square bracket: '['
+             + a space
+             + zero or more occurences of any character except left
+               square bracket, right square bracket and newline
+             + a right square bracket: ']'
+         at the end of string is removed from msgid strings.
+         It also applies to msgstr strings, so that translators can
+         insert an empty string.
+
+     4.  Lines are wrapped by debconf, except when they begin with a
+         space.  Such lines are often used to format lists, but each
+         frontend has its own limitations.  It seems that such lines
+         must not exceed 72 characters in order to be displayed
+         reasonably well on all frontends.
+
+     5.  The podebconf-display-po script (from po-debconf >= 0.8.3)
+         is able to show your translation as it will be displayed by
+         debconf at configuration time.  Run
+            podebconf-display-po -fdialog debian/po/<YOUR_LANG_CODE>.po
+         to have a rough idea on how your translation will look like.
+         But this only works for basic configuration files, rendering
+         may be altered if complex operations (like heavy use of text
+         substitution) are performed.  Available debconf frontends
+         (which can be selected by the -f flag) are listed in
+         debconf(7).

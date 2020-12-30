@@ -1,0 +1,493 @@
+
+=head1 NAME
+
+podebconf-report-po - send outdated debconf PO files to the last translators
+
+=head1 SYNOPSIS
+
+B<podebconf-report-po> [B<I<options>>]
+
+=head1 DESCRIPTION
+
+This program reads a directory with po files to determine which files
+contain fuzzy or missing translations, launches an editor to allow
+modifications of mail body and headers, asks confirmation to send mails,
+and sends them to the last translator requesting updates.  The mail will
+contain the PO file which has to be updated.  B<podebconf-report-po> can
+be called either in the top-level directory, or in F<debian> or
+F<debian/po> subdirectories (or, for non debconf translations, from the
+B<po> directory itself or its parent directory).
+
+B<podebconf-report-po> can also be used to send a call for translations to a
+mailing list.  In that case, the POT file will be attached.
+
+Different templates exist for translation update requests, request to send
+updated PO files to a bug report (B<--submit>) or for calls for
+translations (B<--call>).
+The template can also be provided by the user.
+See the B<TEMPLATES> section for more information on the templates.
+
+=head1 OPTIONS
+
+Many options can be set in a configuration file.
+See section B<CONFIGURATION FILE>.
+
+=over 4
+
+=item B<--addlanguageteam=I<LANGUAGE>:I<LIST>>
+
+Specify a mailing list for a given language.  This mailing list will be
+added to the CC list for the PO files of this language when
+B<--languageteam> is used, in addition to the language team specified in
+the PO file (if these mailing lists differ).
+
+This is useful to keep the specified team informed, and allow a faster
+reaction when a translator is known to be inactive.
+
+This option can be specified more than once.  The language code and
+language mailing list are separated by a colon.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--bts=I<NUMBER>>
+
+After a bug report has been filed (either manually or with the B<--submit>
+flag) to track down translations, B<podebconf-report-po> can be run
+again, but this time with the B<--bts=I<NUMBER>> flag.  Translators are
+then requested to respect the B<Reply-To:> header field which is set to
+this bug report, so that all translations are gathered into a single
+location.
+
+=item B<--call[=I<MAILING_LIST>]>
+
+Send a call for translations.  If the optional I<MAILING_LIST> argument is
+not specified, the call for translations is sent to the Debian
+Internationalization list (I<debian-i18n@lists.debian.org>).
+
+Calls for translations are useful to receive translations in new
+languages.
+
+By default, calls for translation are combined with regular requests for
+updates sent to translators, for the existing translations.  You can
+disable this default behavior with the B<--withouttranslators> option.
+
+=item B<--conf=I<FILE>>
+
+Specify the configuration file.
+By default, B<podebconf-report-po> reads
+F<$HOME/.podebconf-report-po.conf>.
+
+=item B<--noconf>
+
+Do not read any configuration file.
+
+=item B<--deadline=I<DEADLINE>>
+
+Specify the deadline for receiving the updated translations (default is
+no deadline).
+
+This should be a date, which will be prefixed by:
+ The deadline for receiving the updated translation is
+ I<DEADLINE>.
+
+If the specified string starts with a '+', it will be interpreted by:
+ LC_ALL=C date -R -d I<DEADLINE>
+
+If no deadline is specified (and the B<--nodeadline> option is not used),
+a deadline will be prompted to the user, proposing a default deadline set
+to +10days.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--nodeadline>
+
+Deactivate the deadline indication to translators, and avoid the deadline
+prompts.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--default>
+
+Do not open the editor and use the template as is.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--nodefault>
+
+Open an editor before sending the email(s).
+
+=item B<-f>, B<--force>
+
+Send the email(s) without confirmation.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--noforce>
+
+Ask for confirmation before sending email(s).
+
+=item B<--from=I<FROM>>
+
+Specify the name and the email address of the sender (default is taken
+from the B<DEBEMAIL> and B<DEBFULLNAME> environment variables, or from the
+B<EMAIL> environment variable, or is set to the package maintainer if
+these variables are not set).
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--gzip>
+
+Compress PO files in attachment with C<gzip>.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--nogzip>
+
+Do not compress PO files.
+
+=item B<-h>, B<--help>
+
+Print usage information and exit.
+
+=item B<--langs=I<LANGUAGES>>
+
+Specify a list of languages to restrict sending the notification only for
+these languages.
+The list of languages is comma separated. The PO files must be named
+according to these languages, with the .po extension.
+
+=item B<--languageteam>
+
+Send the email also to the Language Team as carbon copy.
+
+It is enabled by default.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--nolanguageteam>
+
+Do not send the email(s) to the language teams.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--mutt>
+
+Send the mails with mutt.
+This set the B<--postpone> argument to F<$HOME/postponed>.
+
+=item B<--notdebconf>
+
+Indicate that it is not a debconf translation.
+B<podebconf-report-po> will use the F<translator-po>, F<call-po>, or
+F<submit-po> template (if no other templates are requested in the
+configuration file or in the command line).
+These templates do not mention debconf in the subject or mail body and are
+more suitable for non-debconf translations.
+
+This option also changes the default F<po> directory used by
+B<podebconf-report-po> (i.e. the B<--podir> option is not needed when the
+call is done from the F<po> directory itself or from its parent directory).
+
+By default, a F<debian/po> directory is preferred over a F<po> directory.
+With this option, only the F<po> directory will be considered.
+
+This option is usually not necessary. B<podebconf-report-po> tries to
+determine the type of translation based on the current directory and the
+existence of a F<debian/po> or F<po> directory.
+
+=item B<--package=I<PACKAGE>>
+
+Specify the name of the package (default is the source package name).
+
+=item B<--podir=I<DIR>>
+
+Specify where the PO files are located.
+By default, B<podebconf-report-po> checks if it is called from a F<po>
+directory, or it searches for a F<debian/po> directory (this can be disabled
+with the B<--notdebconf> option), or for a F<po> directory.
+
+=item B<--postpone=I<MBOX>>
+
+Do not send emails, append them in I<MBOX>.
+This file can be used as a postponed mailbox with B<mutt -p>.
+
+=item B<--potfile=I<POTFILE>>
+
+Specify the POT file to send to a call for translations (B<--call>).
+By default, B<podebconf-report-po> uses the POT file of the PO files
+directory, if there is only one.
+
+This file is also used to find the package's name and version, if none
+were specified with an option, and if no F<debian/changelog> files were
+found.
+
+=item B<--sendmessage>
+
+Only send a message, with no attachments.
+This can be useful when the translators have a commit access to the
+package repository.
+
+=item B<--smtp=I<SERVER>>
+
+Specify SMTP server for mailing (default is C<localhost>).
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--submit>
+
+Instead of sending mails to translators, file a bug report against this
+package to request for translations.  This is useful e.g. when preparing
+non-maintainer uploads to make sure that translations do not get lost.
+
+=item B<--summary>
+
+Send a status report to the maintainer with the list of emails sent to
+translators.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--nosummary>
+
+Do not send any status report to the maintainer.
+
+=item B<--utf8>
+
+Send the email in UTF-8.  This allow non-ascii characters in the mail body
+and mail header.  The editor must support UTF-8.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--noutf8>
+
+Send the email(s) in us-ascii.  Non-ascii characters are replaced by a
+question mark.
+
+=item B<--version>
+
+Print version information and exit.
+
+=item B<-v>, B<--verbose>
+
+Display additional information while running.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--noverbose>
+
+Do not use the verbose mode.
+
+=item B<--templatecall=I<TEMPLATE>>
+
+Specify a file to use as a template for the call for translations email(s).
+The default template is F</usr/share/po-debconf/templates/call>.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--templatesubmit=I<TEMPLATE>>
+
+Specify a file to use as a template for the email(s) sent to translators
+when the B<--submit> option is used.
+The default template is F</usr/share/po-debconf/templates/submit>.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--templatetranslators=I<TEMPLATE>>
+
+Specify a file to use as a template for the email(s) sent to translators.
+The default template is F</usr/share/po-debconf/templates/translators>.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--template=I<TEMPLATE>>
+
+Specify file to use it as template for the email(s).
+If a template is specified with this option, this template will be used
+rather than a template specified with any of the B<--templatetranslators>,
+B<--templatesubmit>, or B<--templatecall> options.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--notemplate>
+
+Use the default template.
+
+=item B<--withtranslators>
+
+Send requests for updates to the translators after sending the call for
+translation.
+
+This option is ignored when the B<--call> option is not specified.
+It is enabled by default.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=item B<--withouttranslators>
+
+Do not send requests for translation update to the translators after a
+call for translations.
+
+This option can be specified in the configuration file to define default
+behavior of B<podebconf-report-po>.  See section B<CONFIGURATION FILE>
+below.
+
+=back
+
+=head1 CONFIGURATION FILE
+
+By default, B<podebconf-report-po> reads
+F<$HOME/.podebconf-report-po.conf>.
+The configuration file can be set with the B<--conf> option.
+You can also ignore any configuration file by specifying the B<--noconf>
+option.
+Command line options can be used to override configuration file settings.
+
+The configuration files accept most of the command line options, without
+the leading B<-->:
+B<deadline>,
+B<nodeadline>,
+B<smtp>,
+B<from>,
+B<verbose>,
+B<force>,
+B<templatetranslators>,
+B<templatesubmit>,
+B<templatecall>,
+B<template>,
+B<default>,
+B<gzip>,
+B<languageteam>,
+B<nolanguageteam>,
+B<addlanguageteam>,
+B<summary>,
+B<utf8>,
+B<withouttranslators>,
+B<withtranslators>.
+
+Lines starting by a number sign (possibly preceded by spaces) are comments
+and are ignored.
+
+Here is an example:
+ # This is a comment
+ smtp smtp.mydomain
+ from = Me Myself <me@mydomain>
+ utf8
+
+=head1 TEMPLATES
+
+The templates specified with the B<--template>, B<--templatetranslators>,
+B<--templatesubmit>, or B<--templatecall> options can contain the
+following tags:
+
+=over 4
+
+=item B<<from>>, B<<subject>>, B<<reply-to>>
+
+Replaced by the corresponding headers of the email(s).
+
+=item B<<filelist>>
+
+In the default mode, it is replaced by comments showing the list of
+translators with outdated translations.
+
+In the B<--submit> mode, it is replaced by the list of PO files with
+outdated translations.
+
+And in the B<--call> mode, it is replaced by the list of PO files found in
+the PO directory.
+
+=item B<<reply>>
+
+Replaced by a string that indicates how the translators have to reply
+(e.g. follow the I<Reply-To> tag or sending the PO to a given bug report).
+
+=item B<<deadline>>
+
+Replaced by a string indicating the deadline for the translation (see
+B<--deadline>).
+
+=item B<<package>>
+
+Replaced by the name of the package (if it was detected).
+
+=item B<<statistics>>
+
+Replaced by the statistics of the PO files found in the PO directory (in the
+B<--call> mode only).
+
+=back
+
+The F</usr/share/po-debconf/templates> directory contains the default
+templates.
+
+=head1 EXAMPLES
+
+The recommended usage is to call B<podebconf-report-po> from the F<po>
+directory to be updated:
+
+podebconf-report-po --call
+
+This will send a call for new translations to the
+<debian-i18n@lists.debian.org> mailing list and will ask translation
+updates to the previous translators. The language teams will also be
+notified and should be able to react if the assigned translator is known
+to be MIA.
+
+A prompt will ask a deadline to the user (the default is to request
+translations and updates within 10 days).
+
+Then an editor will display the message to be sent to the mailing list.
+When this editor exits, B<podebconf-report-po> will ask confirmation
+to send the mail to the mailing list.
+
+If confirmed, another editor will display the message to be sent to the
+translators and language teams. 
+B<podebconf-report-po> will ask for another confirmation to send the mails
+to translators and language teams.
+
+You should make a new release with the received translations after the
+deadline.
+
+=head1 SEE ALSO
+
+L<debconf-updatepo(1)>
+
+=head1 AUTHOR
+
+  Fabio Tranchitella <kobold@kobold.it>
+
